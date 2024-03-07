@@ -7,7 +7,7 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
   timestamps: true,
   paranoid: true,
 })
-export class Rol extends Model<Rol> {
+export class Role extends Model<Role> {
   @ApiProperty()
   @Column({
     type: DataType.NUMBER,
@@ -22,11 +22,4 @@ export class Rol extends Model<Rol> {
     allowNull: false,
   })
   rol_nombre: string;
-
-  @ApiProperty()
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  rol_des: string;
 }

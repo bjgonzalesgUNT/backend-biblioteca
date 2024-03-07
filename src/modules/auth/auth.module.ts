@@ -7,10 +7,19 @@ import { userProviders } from '../user/user.providers';
 import { LocalStrategy } from './strategies/local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { userRoleProviders } from '../user-role/user-role.providers';
+import { roleProviders } from '../role/role.providers';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy, ...userProviders],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    ...userProviders,
+    ...userRoleProviders,
+    ...roleProviders,
+  ],
   imports: [
     PassportModule,
     JwtModule.registerAsync({

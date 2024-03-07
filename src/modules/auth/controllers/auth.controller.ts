@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Param } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { User } from '../../../modules/user/user.entity';
@@ -23,5 +23,11 @@ export class AuthController {
   @ApiOkResponse({ type: User })
   singUp(@Body() createUserDto: CreateUserDto) {
     return this.authService.singUp(createUserDto);
+  }
+
+  @Get('validate-token/:token')
+  @ApiOkResponse({ type: User })
+  validateToken(@Param('token') token: string) {
+    return this.authService.validateToken(token);
   }
 }

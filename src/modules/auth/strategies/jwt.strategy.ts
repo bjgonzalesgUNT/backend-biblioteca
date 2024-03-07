@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { USER_REPOSITORY } from 'src/core/constants';
 import { User } from 'src/modules/user/user.entity';
-import { PayloadI } from '../interfaces/payload.interface';
+import { IPayload } from '../interfaces/payload.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -17,16 +17,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(paylaod: PayloadI) {
-    const { usu_id } = paylaod;
+  async validate(paylaod: IPayload) {
+    const { usu_email } = paylaod;
     const user = await this.userRepository.findOne({
-      where: { usu_id },
+      where: { usu_email },
     });
 
-    if (!user)
-      throw new UnauthorizedException(
-        'No estas autorizado para realizar operaciones',
-      );
+    if (!user) throw new UnauthorizedException('Usuario no autorizado');
+
     return paylaod;
   }
 }

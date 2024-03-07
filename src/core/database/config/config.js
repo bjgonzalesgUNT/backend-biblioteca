@@ -1,7 +1,10 @@
-import 'dotenv/config';
-import { DatabaseConfigI } from '../interfaces/database.interface';
+const dotenv = require('dotenv');
+const { join } = require('path');
 
-export const databaseConfig: DatabaseConfigI = {
+//! EN CASO EL ARCHIVO config.js NO SE ENCUENTRE EN LA CARPETA RAIZ
+dotenv.config({ path: join(__dirname, '../../../../.env') });
+
+module.exports = {
   development: {
     dialect: process.env.DB_DIALECT,
     host: process.env.DB_HOST,

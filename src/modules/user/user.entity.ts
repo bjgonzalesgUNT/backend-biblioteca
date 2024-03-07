@@ -1,16 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
-  ForeignKey,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Employee } from '../employee/employee.entity';
-import { Rol } from '../rol/rol.entity';
-import { UserRol } from '../user-rol/user-rol.entity';
+import { Role } from '../role/role.entity';
+import { UserRole } from '../user-role/user-role.entity';
 
 @Table({
   schema: 'sistemas',
@@ -42,17 +39,6 @@ export class User extends Model<User> {
   })
   usu_password: string;
 
-  @ApiProperty()
-  @ForeignKey(() => Employee)
-  @Column({
-    type: DataType.NUMBER,
-    allowNull: false,
-  })
-  usu_tra_id: number;
-
-  @BelongsToMany(() => Rol, () => UserRol)
-  roles: Rol[];
-
-  @BelongsTo(() => Employee, { foreignKey: 'usu_tra_id' })
-  employee: Employee;
+  @BelongsToMany(() => Role, () => UserRole)
+  roles: Role[];
 }
