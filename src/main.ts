@@ -1,13 +1,14 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from './swagger';
-import { LoggerService } from './core/logger/logger.service';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import * as bodyParser from 'body-parser';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import * as colors from 'colors';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import { AppModule } from './app.module';
+import { LoggerService } from './core/logger/logger.service';
+import { setupSwagger } from './swagger';
+import { HOST_KEY, PORT_KEY } from './core/constants';
 
 async function bootstrap() {
   const env = process.env.NODE_ENV;
@@ -18,8 +19,8 @@ async function bootstrap() {
   });
 
   const configService = app.get(ConfigService);
-  const HOST = configService.get('HOST', 'localhost');
-  const PORT = configService.get('PORT');
+  const HOST = configService.get(HOST_KEY, 'localhost');
+  const PORT = configService.get(PORT_KEY);
 
   // BodyParser
   app.use(
@@ -69,10 +70,7 @@ async function bootstrap() {
   colors.enable();
 
   env != 'production'
-    ? Logger.log(
-        'Boostrapt',
-        `🚀 Server ready at http://${HOST}:${PORT.cyan.bold}`,
-      )
+    ? Logger.log('Boostrapt', `🚀 Server ready at ${HOST}:${PORT.cyan.bold}`)
     : Logger.log(
         'Boostrapt',
         `🚀  Server is listening on port ${PORT.cyan.bold}`,

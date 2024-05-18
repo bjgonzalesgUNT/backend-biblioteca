@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize-typescript';
-import { DEVELOPMENT, PRODUCTION, TEST, SEQUELIZE } from '../constants';
-import { databaseConfig } from './config/database.config';
 import { User } from '../../modules/user/user.entity';
-import { UserRole } from '../../modules/user-role/user-role.entity';
-import { Role } from '../../modules/role/role.entity';
+import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
+import { Person } from './../../modules/person/person.entity';
+import { Role } from './../../modules/role/role.entity';
+import { UserRole } from './../../modules/user-role/user-role.entity';
+import { databaseConfig } from './config/database.config';
 
 export const databaseProviders = [
   {
@@ -28,7 +29,7 @@ export const databaseProviders = [
         define: { freezeTableName: true },
       });
 
-      sequelize.addModels([User, UserRole, Role]);
+      sequelize.addModels([User, UserRole, Role, Person]);
 
       return sequelize;
     },

@@ -9,7 +9,8 @@ module.exports = {
       { schema: 'sistemas', tableName: 'roles' },
       [
         {
-          rol_nombre: 'user',
+          rol_nombre: 'user'.toUpperCase(),
+          rol_descripcion: 'usuario'.toUpperCase(),
         },
       ],
     );

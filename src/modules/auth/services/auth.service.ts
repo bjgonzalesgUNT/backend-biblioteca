@@ -6,91 +6,69 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { databaseError } from 'src/core/database/error/database-error';
-import { Role } from 'src/modules/role/role.entity';
-import { UserRole } from 'src/modules/user-role/user-role.entity';
+import { QueryTypes } from 'sequelize';
 import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
-import {
-  ROLE_REPOSITORY,
-  USER_REPOSITORY,
-  USER_ROLE_REPOSITORY,
-} from '../../../core/constants';
+import { USER_REPOSITORY } from '../../../core/constants';
 import { User } from '../../../modules/user/user.entity';
 import { LoginDto } from '../dto/login.dto';
+import { IUserDB } from '../interfaces';
 import { IPayload } from '../interfaces/payload.interface';
+import { handlerExceptions } from './../../../core/database/handlers/handler-exceptions';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
     private readonly jwtService: JwtService,
-    @Inject(USER_ROLE_REPOSITORY)
-    private readonly userRoleRepository: typeof UserRole,
-    @Inject(ROLE_REPOSITORY) private readonly roleRepository: typeof Role,
   ) {}
 
-  async login(user: User) {
-    const token = await this.generateToken(user);
+  async login(user: IUserDB) {
+    const { usu_email } = user;
+    const token = await this.generateToken({ usu_email });
     return { user, token };
   }
 
   async singUp(createUserDto: CreateUserDto) {
-    const t = await this.userRepository.sequelize.transaction();
     try {
-      const { email, password } = createUserDto;
+      const { email, password, personId } = createUserDto;
 
-      const passHash = await this.hashPassword(password);
-
-      const newUser = await this.userRepository.create(
+      //* CREATE A NEW USER
+      const [newUser] = (await this.userRepository.sequelize.query(
+        'SELECT * FROM sistemas.fn_crear_usuario(?,?,?)',
         {
-          usu_email: email,
-          usu_password: passHash,
+          replacements: [email, this.hashPassword(password), personId],
+          type: QueryTypes.SELECT,
         },
-        { transaction: t },
-      );
+      )) as [{ data: IUserDB }];
 
-      //* Save default role to new user (user)
-      const defaultRole = await this.roleRepository.findOne({
-        where: { rol_nombre: 'user' },
-      });
+      const { data: userData } = newUser;
 
-      //* Save user role
-      await this.userRoleRepository.create(
-        {
-          usr_usu_id: newUser.usu_id,
-          usr_rol_id: defaultRole.rol_id,
-        },
-        { transaction: t },
-      );
+      if (!userData) throw new InternalServerErrorException();
+
+      //* GENERATE A TOKEN
+      const payload: IPayload = { usu_email: userData.usu_email };
+
+      const token = await this.generateToken(payload);
+
+      if (!token) throw new InternalServerErrorException();
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { usu_password, ...rest } = newUser['dataValues'];
+      const { usu_password, ...rest } = userData;
 
-      //* Generate token
-      const token = await this.generateToken({
-        usu_email: newUser.usu_email,
-        roles: newUser.roles,
-      });
-
-      await t.commit();
-
-      return { user: { ...rest, role: defaultRole }, token: token };
+      return { user: rest, token };
     } catch (error) {
-      await t.rollback();
-      databaseError(error);
+      handlerExceptions(error);
     }
   }
 
   async validateToken(token: string) {
-    console.log(token);
-
     const isValid = await this.jwtService.verifyAsync<IPayload>(token);
 
-    if (!isValid) throw new UnauthorizedException('Token invalido');
+    if (!isValid) throw new UnauthorizedException('Token is invalid');
 
     const user = await this.findOneUser(isValid.usu_email);
 
-    if (!user) throw new InternalServerErrorException('Usuario no encontrado');
+    if (!user) throw new InternalServerErrorException('User not found');
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { usu_password, ...rest } = user;
@@ -106,23 +84,27 @@ export class AuthService {
 
     const match = await this.comparePassword(password, user.usu_password);
 
-    if (!match) throw new UnauthorizedException('Credenciales invalidas');
+    if (!match) throw new UnauthorizedException('Invalid credentials');
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { usu_password, ...rest } = user['dataValues'];
+    const { usu_password, ...rest } = user;
 
+    // Return user to request
     return rest;
   }
 
-  private async findOneUser(usu_email: string) {
-    const user = await this.userRepository.findOne({
-      where: { usu_email },
-      include: [Role],
-    });
+  private async findOneUser(usuEmail: string) {
+    const [newUser] = (await this.userRepository.sequelize.query(
+      'SELECT * FROM sistemas.fn_get_usuario(?)',
+      {
+        replacements: [usuEmail],
+        type: QueryTypes.SELECT,
+      },
+    )) as [{ data: IUserDB }];
 
-    if (!user) throw new UnauthorizedException('Credenciales invalidas');
+    if (!newUser) throw new UnauthorizedException('Credenciales invalidas');
 
-    return user;
+    return newUser.data;
   }
 
   private async generateToken(payload: IPayload): Promise<string> {
@@ -130,8 +112,8 @@ export class AuthService {
     return token;
   }
 
-  private async hashPassword(password: string): Promise<string> {
-    const hash: string = await bcrypt.hash(password, 10);
+  private hashPassword(password: string): string {
+    const hash: string = bcrypt.hashSync(password, 10);
     return hash;
   }
 

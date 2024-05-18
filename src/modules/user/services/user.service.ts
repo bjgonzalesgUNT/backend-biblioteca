@@ -1,20 +1,35 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ApiRoutes } from 'src/core/api';
 import { USER_REPOSITORY } from '../../../core/constants';
+import { PaginationResponse } from '../../../core/dto';
+import { PaginationDto } from '../../../core/dto/pagination/pagination.dto';
 import { User } from '../user.entity';
-import { PaginationDto } from '../../../core/dto/pagination.dto';
-import { UserR } from '../dto';
+import { ApiMethods } from './../../../core/api/methods.api';
+import { PaginationService } from './../../../core/pagination/services/pagination.service';
 
 @Injectable()
 export class UserService {
   constructor(
+    private readonly paginationService: PaginationService,
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
   ) {}
 
-  async findAll(paginationDto?: PaginationDto): Promise<UserR> {
-    const { limit, offset } = paginationDto;
-    const query = await this.userRepository.findAndCountAll({ limit, offset });
-    if (query.count === 0)
-      throw new NotFoundException('No se encontraron resultados');
-    return query;
+  async findAll(
+    paginationDto?: PaginationDto,
+  ): Promise<PaginationResponse<User>> {
+    const { count, rows } = await this.userRepository.findAndCountAll({
+      ...this.paginationService.generate(paginationDto),
+    });
+
+    if (rows.length === 0) throw new NotFoundException();
+
+    return this.paginationService.create<User>({
+      apiMethod: ApiMethods.FIND_ALL,
+      apiRoute: ApiRoutes.USER,
+      total: count,
+      data: rows,
+      page: paginationDto.page,
+      limit: paginationDto.limit,
+    });
   }
 }

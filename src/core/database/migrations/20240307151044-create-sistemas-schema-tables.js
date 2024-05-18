@@ -3,6 +3,81 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    //* Create "personas" table
+    await queryInterface.createTable(
+      {
+        schema: 'sistemas',
+        tableName: 'personas',
+      },
+      {
+        per_id: {
+          type: Sequelize.DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+
+        per_ape_pat: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_ape_mat: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_nombres: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_nacionalidad: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_num_doc: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+          unique: true,
+        },
+
+        per_num_tel: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_genero: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        },
+
+        per_fec_nac: {
+          type: Sequelize.DataTypes.STRING,
+        },
+
+        per_domicilio: {
+          type: Sequelize.DataTypes.STRING,
+        },
+
+        createdAt: {
+          type: Sequelize.DataTypes.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+          allowNull: false,
+        },
+
+        updatedAt: {
+          type: Sequelize.DataTypes.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+          allowNull: false,
+        },
+
+        deletedAt: {
+          type: Sequelize.DataTypes.DATE,
+        },
+      },
+    );
+
     //* Create "usuarios" table
     await queryInterface.createTable(
       {
@@ -25,6 +100,15 @@ module.exports = {
         usu_password: {
           type: Sequelize.DataTypes.STRING,
           allowNull: false,
+        },
+
+        usu_per_id: {
+          type: Sequelize.DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'personas',
+            key: 'per_id',
+          },
         },
 
         createdAt: {
@@ -61,6 +145,10 @@ module.exports = {
         rol_nombre: {
           type: Sequelize.DataTypes.STRING,
           allowNull: false,
+        },
+
+        rol_descripcion: {
+          type: Sequelize.DataTypes.STRING,
         },
 
         createdAt: {
@@ -255,6 +343,11 @@ module.exports = {
     await queryInterface.dropTable({
       schema: 'sistemas',
       tableName: 'usuarios',
+    });
+
+    await queryInterface.dropTable({
+      schema: 'sistemas',
+      tableName: 'personas',
     });
   },
 };

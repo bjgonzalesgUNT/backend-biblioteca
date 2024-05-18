@@ -8,12 +8,12 @@ export class PaginationDto {
   @Type(() => Number)
   @IsNumber()
   @IsPositive()
-  readonly limit?: number;
+  readonly page?: number;
 
   @ApiPropertyOptional()
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  readonly offset?: number;
+  readonly limit?: number;
 }

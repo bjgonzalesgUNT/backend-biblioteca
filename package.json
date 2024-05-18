@@ -22,7 +22,10 @@
     "docker": "docker-compose up -d",
     "migrate": "npx sequelize-cli db:migrate --env development",
     "migrate:undo": "npx sequelize-cli db:migrate:undo --env development",
-    "seed": "npx sequelize-cli db:seed:all --env development"
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --env development",
+    "seed": "npx sequelize-cli db:seed:all --env development",
+    "seed:undo": "npx sequelize-cli db:seed:undo --env development",
+    "seed:undo:all": "npx sequelize-cli db:seed:undo:all --env development"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
