@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PaginationResponse } from '../../../core/dto';
+import { RPagination } from '../../../core/dto';
 import { PaginationGenerateProps, PaginationProps } from '../interfaces';
 import {
   DEFAULT_LIMIT_KEY,
@@ -32,7 +32,7 @@ export class PaginationService {
     };
   }
 
-  create<T>(props: PaginationProps<T>): PaginationResponse<T> {
+  create<T>(props: PaginationProps<T>): RPagination<T> {
     const {
       total,
       page = this.DEFAULT_PAGE,

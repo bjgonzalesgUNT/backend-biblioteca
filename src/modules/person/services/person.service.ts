@@ -4,7 +4,7 @@ import { CreatePersonDto, UpdatePersonDto } from '../dto';
 import { Person } from '../person.entity';
 import { PERSON_REPOSITORY } from './../../../core/constants';
 import { handlerExceptions } from './../../../core/database/handlers';
-import { PaginationDto, PaginationResponse } from './../../../core/dto';
+import { PaginationDto, RPagination } from './../../../core/dto';
 import { PaginationService } from './../../../core/pagination/services/pagination.service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class PersonService {
 
   async findAll(
     paginationDto?: PaginationDto,
-  ): Promise<PaginationResponse<Person>> {
+  ): Promise<RPagination<Person>> {
     const { count, rows } = await this.personRepository.findAndCountAll({
       ...this.paginationService.generate(paginationDto),
     });

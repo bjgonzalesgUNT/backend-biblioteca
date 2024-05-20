@@ -12,7 +12,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/modules/auth/decorators';
 import { ERoles } from 'src/modules/auth/enums';
 import { ApiMethods, ApiRoutes } from '../../../core/api';
-import { PaginationDto, PaginationResponse } from '../../../core/dto';
+import { PaginationDto, RPagination } from '../../../core/dto';
 import { CreatePersonDto, UpdatePersonDto } from '../dto';
 import { Person } from '../person.entity';
 import { PersonService } from '../services/person.service';
@@ -31,7 +31,7 @@ export class PersonController {
 
   @Get(ApiMethods.FIND_ALL)
   @Auth(ERoles.USER)
-  @ApiOkResponse({ type: PaginationResponse })
+  @ApiOkResponse({ type: RPagination })
   findAll(@Query() paginationDto?: PaginationDto) {
     return this.personService.findAll(paginationDto);
   }

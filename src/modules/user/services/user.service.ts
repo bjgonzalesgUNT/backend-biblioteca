@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ApiRoutes } from 'src/core/api';
 import { USER_REPOSITORY } from '../../../core/constants';
-import { PaginationResponse } from '../../../core/dto';
+import { RPagination } from '../../../core/dto';
 import { PaginationDto } from '../../../core/dto/pagination/pagination.dto';
 import { User } from '../user.entity';
 import { ApiMethods } from './../../../core/api/methods.api';
@@ -16,7 +16,7 @@ export class UserService {
 
   async findAll(
     paginationDto?: PaginationDto,
-  ): Promise<PaginationResponse<User>> {
+  ): Promise<RPagination<User>> {
     const { count, rows } = await this.userRepository.findAndCountAll({
       ...this.paginationService.generate(paginationDto),
     });

@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { PaginationResponse } from 'src/core/dto/pagination/pagination-response.dto';
+import { RPagination } from 'src/core/dto/pagination/pagination-response.dto';
 import { PaginationDto } from '../../../core/dto/pagination/pagination.dto';
 import { Auth } from '../../../modules/auth/decorators';
 import { ERoles } from '../../../modules/auth/enums';
@@ -13,7 +13,7 @@ export class UserController {
 
   @Get('find-all')
   @Auth(ERoles.ADMIN)
-  @ApiResponse({ type: PaginationResponse })
+  @ApiResponse({ type: RPagination })
   findAll(@Query() paginationDto?: PaginationDto) {
     return this.userService.findAll(paginationDto);
   }
