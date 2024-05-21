@@ -10,7 +10,7 @@ npm install
 
 ## Enviroments
 
-Rename `.env.copy` file to `.env`
+Copy `.env.sample` file and rename to `.env`
 
 ## Running the app
 
