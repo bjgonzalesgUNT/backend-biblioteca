@@ -19,7 +19,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky init",
-    "docker": "docker-compose up -d",
+    "docker:start": "docker-compose up --remove-orphans -d",
     "migrate": "npx sequelize-cli db:migrate --env development",
     "migrate:undo": "npx sequelize-cli db:migrate:undo --env development",
     "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --env development",
