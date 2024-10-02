@@ -1,10 +1,7 @@
-version: '3.0'
-
 services:
-  postgres-nestjs-db:
+  database:
     image: postgres:16.1
-    container_name: backend-base-nestjs
-    restart: always
+    container_name: database
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}

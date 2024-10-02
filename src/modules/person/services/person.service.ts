@@ -22,9 +22,7 @@ export class PersonService {
     }
   }
 
-  async findAll(
-    paginationDto?: PaginationDto,
-  ): Promise<RPagination<Person>> {
+  async findAll(paginationDto?: PaginationDto): Promise<RPagination<Person>> {
     const { count, rows } = await this.personRepository.findAndCountAll({
       ...this.paginationService.generate(paginationDto),
     });

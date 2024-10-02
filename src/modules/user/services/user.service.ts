@@ -14,9 +14,7 @@ export class UserService {
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
   ) {}
 
-  async findAll(
-    paginationDto?: PaginationDto,
-  ): Promise<RPagination<User>> {
+  async findAll(paginationDto?: PaginationDto): Promise<RPagination<User>> {
     const { count, rows } = await this.userRepository.findAndCountAll({
       ...this.paginationService.generate(paginationDto),
     });
