@@ -1,11 +1,17 @@
+import {
+  JWT_KEY,
+  ROLE_NOT_AUTHORIZED_MESSAGE,
+  USER_NOT_AUTHORIZED_MESSAGE,
+  USER_REPOSITORY,
+} from '@/core/constants';
+import { UserDB } from '@/modules/users/dto';
+import { User } from '@/modules/users/entities';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { QueryTypes } from 'sequelize';
-import { JWT_KEY, USER_REPOSITORY } from 'src/core/constants';
-import { User } from '../../../modules/user/user.entity';
-import { IPayload, IUserDB } from '../interfaces';
+import { IPayload } from '../interfaces';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -20,17 +26,22 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: IPayload) {
-    const { usu_email } = payload;
+  async validate(payload: IPayload): Promise<UserDB> {
+    const { username } = payload;
 
-    const [userDatabase] = (await this.userRepository.sequelize.query(
-      'SELECT * FROM sistemas.fn_get_usuario(?)',
-      { replacements: [usu_email], type: QueryTypes.SELECT },
-    )) as [{ data: IUserDB }];
+    const [user] = (await this.userRepository.sequelize.query(
+      'SELECT * FROM sistemas.fn_get_user_by_username(?);',
+      {
+        type: QueryTypes.SELECT,
+        replacements: [username],
+      },
+    )) as [UserDB];
 
-    if (!userDatabase)
-      throw new UnauthorizedException('User is not authorized');
+    if (!user) throw new UnauthorizedException(ROLE_NOT_AUTHORIZED_MESSAGE);
 
-    return userDatabase.data;
+    if (!user.status)
+      throw new UnauthorizedException(USER_NOT_AUTHORIZED_MESSAGE);
+
+    return user;
   }
 }

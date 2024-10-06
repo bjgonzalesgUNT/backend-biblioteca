@@ -1,10 +1,10 @@
-import { ApiMethods, ApiRoutes } from '../../../core/api';
+import { ApiMethods, ERoutes } from '../../../core/api';
 
 export interface PaginationProps<T> {
   total: number;
   page: number;
   limit: number;
-  apiRoute: ApiRoutes | string;
+  apiRoute: ERoutes | string;
   apiMethod: ApiMethods | string;
   extraParams?: object | null;
   data: T[];

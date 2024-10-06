@@ -126,7 +126,7 @@ module.exports = {
           autoIncrement: true,
         },
 
-        email: {
+        username: {
           type: Sequelize.DataTypes.STRING,
           unique: true,
           allowNull: false,

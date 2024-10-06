@@ -1,17 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  BelongsToMany,
-  Column,
-  DataType,
-  Model,
-  Table,
-} from 'sequelize-typescript';
-import { Role } from '../role/role.entity';
-import { UserRole } from '../user-role/user-role.entity';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table({
   schema: 'sistemas',
-  tableName: 'usuarios',
+  tableName: 'users',
   timestamps: true,
   paranoid: true,
 })
@@ -22,7 +14,7 @@ export class User extends Model<User> {
     primaryKey: true,
     autoIncrement: true,
   })
-  usu_id: number;
+  id: number;
 
   @ApiProperty()
   @Column({
@@ -30,15 +22,28 @@ export class User extends Model<User> {
     allowNull: false,
     unique: true,
   })
-  usu_email: string;
+  username: string;
 
   @ApiProperty()
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
   })
-  usu_password: string;
+  password: string;
 
-  @BelongsToMany(() => Role, () => UserRole)
-  roles: Role[];
+  @ApiProperty()
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    unique: true,
+  })
+  person_id: number;
+
+  @ApiProperty()
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  role_id: number;
 }

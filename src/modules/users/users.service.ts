@@ -1,14 +1,14 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ApiRoutes } from 'src/core/api';
-import { USER_REPOSITORY } from '../../../core/constants';
-import { RPagination } from '../../../core/dto';
-import { PaginationDto } from '../../../core/dto/pagination/pagination.dto';
-import { User } from '../user.entity';
-import { ApiMethods } from './../../../core/api/methods.api';
-import { PaginationService } from './../../../core/pagination/services/pagination.service';
+import { ERoutes } from 'src/core/api';
+import { ApiMethods } from '../../core/api/methods.api';
+import { USER_REPOSITORY } from '../../core/constants';
+import { RPagination } from '../../core/dto';
+import { PaginationDto } from '../../core/dto/pagination/pagination.dto';
+import { PaginationService } from '../../core/pagination/services/pagination.service';
+import { User } from './entities/user.entity';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     private readonly paginationService: PaginationService,
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
@@ -23,7 +23,7 @@ export class UserService {
 
     return this.paginationService.create<User>({
       apiMethod: ApiMethods.FIND_ALL,
-      apiRoute: ApiRoutes.USER,
+      apiRoute: ERoutes.USERS,
       total: count,
       data: rows,
       page: paginationDto.page,

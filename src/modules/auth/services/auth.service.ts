@@ -1,19 +1,13 @@
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { CREDENTIALS_INVALID_MESSAGE, USER_REPOSITORY } from '@/core/constants';
+import { CreateUserDto, UserDB } from '@/modules/users/dto';
+import { User } from '@/modules/users/entities';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { QueryTypes } from 'sequelize';
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
-import { USER_REPOSITORY } from '../../../core/constants';
-import { User } from '../../../modules/user/user.entity';
+import { ChangePasswordDto } from '../dto';
 import { LoginDto } from '../dto/login.dto';
-import { IUserDB } from '../interfaces';
 import { IPayload } from '../interfaces/payload.interface';
-import { handlerExceptions } from './../../../core/database/handlers/handler-exceptions';
 
 @Injectable()
 export class AuthService {
@@ -22,93 +16,91 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(user: IUserDB) {
-    const { usu_email } = user;
-    const token = await this.generateToken({ usu_email });
+  async login(user: UserDB) {
+    const token = this.generateToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
+
     return { user, token };
   }
 
   async singUp(createUserDto: CreateUserDto) {
-    try {
-      const { email, password, personId } = createUserDto;
+    const { username, password, person_id, role_id } = createUserDto;
 
-      //* CREATE A NEW USER
-      const [newUser] = (await this.userRepository.sequelize.query(
-        'SELECT * FROM sistemas.fn_crear_usuario(?,?,?)',
-        {
-          replacements: [email, this.hashPassword(password), personId],
-          type: QueryTypes.SELECT,
-        },
-      )) as [{ data: IUserDB }];
+    const verifyUser = await this.findOneUser(username);
 
-      const { data: userData } = newUser;
+    if (verifyUser) throw new UnauthorizedException('El usuario ya existe');
 
-      if (!userData) throw new InternalServerErrorException();
+    await this.userRepository.create({
+      username,
+      password: this.hashPassword(password),
+      person_id,
+      role_id,
+    });
 
-      //* GENERATE A TOKEN
-      const payload: IPayload = { usu_email: userData.usu_email };
+    const userDB = await this.findOneUserByUsername(username);
 
-      const token = await this.generateToken(payload);
+    const token = this.generateToken({
+      id: userDB.id,
+      username,
+      role: userDB.role,
+    });
 
-      if (!token) throw new InternalServerErrorException();
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { usu_password, ...rest } = userData;
-
-      return { user: rest, token };
-    } catch (error) {
-      handlerExceptions(error);
-    }
+    return { user: userDB, token };
   }
 
-  async validateToken(token: string) {
-    const isValid = await this.jwtService.verifyAsync<IPayload>(token);
+  async changePassword(
+    user: UserDB,
+    changePasswordDto: ChangePasswordDto,
+  ): Promise<void> {
+    const { current_password, new_password } = changePasswordDto;
 
-    if (!isValid) throw new UnauthorizedException('Token is invalid');
+    const usr = await this.findOneUser(user.username);
 
-    const user = await this.findOneUser(isValid.usu_email);
+    const match = await this.comparePassword(current_password, usr.password);
 
-    if (!user) throw new InternalServerErrorException('User not found');
+    if (!match) throw new UnauthorizedException(CREDENTIALS_INVALID_MESSAGE);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { usu_password, ...rest } = user;
-
-    return rest;
+    await usr.update({ password: this.hashPassword(new_password) });
   }
 
   //* Local Strategy (login)
-  async validateUser(loginDto: LoginDto) {
-    const { username, password } = loginDto;
+  async validateUser(loginDto: LoginDto): Promise<UserDB> {
+    const { username } = loginDto;
 
     const user = await this.findOneUser(username);
 
-    const match = await this.comparePassword(password, user.usu_password);
+    const match = await this.comparePassword(loginDto.password, user.password);
 
-    if (!match) throw new UnauthorizedException('Invalid credentials');
+    if (!match) throw new UnauthorizedException(CREDENTIALS_INVALID_MESSAGE);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { usu_password, ...rest } = user;
-
-    // Return user to request
-    return rest;
+    return await this.findOneUserByUsername(username);
   }
 
-  private async findOneUser(usuEmail: string) {
-    const [newUser] = (await this.userRepository.sequelize.query(
-      'SELECT * FROM sistemas.fn_get_usuario(?)',
+  private async findOneUser(username: string): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: { username },
+    });
+
+    return user;
+  }
+
+  private async findOneUserByUsername(username: string): Promise<UserDB> {
+    const [user] = (await this.userRepository.sequelize.query(
+      'SELECT * FROM sistemas.fn_get_user_by_username(?)',
       {
-        replacements: [usuEmail],
         type: QueryTypes.SELECT,
+        replacements: [username],
       },
-    )) as [{ data: IUserDB }];
+    )) as [UserDB];
 
-    if (!newUser) throw new UnauthorizedException('Credenciales invalidas');
-
-    return newUser.data;
+    return user;
   }
 
-  private async generateToken(payload: IPayload): Promise<string> {
-    const token = await this.jwtService.signAsync(payload);
+  private generateToken(payload: IPayload): string {
+    const token = this.jwtService.sign(payload);
     return token;
   }
 

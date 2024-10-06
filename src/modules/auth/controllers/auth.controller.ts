@@ -1,22 +1,24 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ERoutes } from '@/core/api';
+import { CreateUserDto, UserDB } from '@/modules/users/dto';
+import { User } from '@/modules/users/entities';
+import { Body, Controller, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
-import { ApiRoutes } from '../../../core/api';
-import { User } from '../../../modules/user/user.entity';
+import { Auth } from '../decorators';
 import { GetUser } from '../decorators/get-user.decorator';
+import { ChangePasswordDto } from '../dto';
 import { LoginDto } from '../dto/login.dto';
 import { AuthService } from '../services/auth.service';
 
-@Controller(ApiRoutes.AUTH)
-@ApiTags(ApiRoutes.AUTH)
+@Controller(ERoutes.AUTH)
+@ApiTags(ERoutes.AUTH)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   @ApiBody({ type: LoginDto })
   @UseGuards(AuthGuard('local'))
-  login(@GetUser() user: User) {
+  login(@GetUser() user: UserDB) {
     return this.authService.login(user);
   }
 
@@ -26,9 +28,12 @@ export class AuthController {
     return this.authService.singUp(createUserDto);
   }
 
-  @Get('validate-token/:token')
-  @ApiOkResponse({ type: User })
-  validateToken(@Param('token') token: string) {
-    return this.authService.validateToken(token);
+  @Patch('change-password')
+  @Auth()
+  changePassword(
+    @GetUser() user: UserDB,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    return this.authService.changePassword(user, changePasswordDto);
   }
 }

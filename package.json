@@ -26,7 +26,8 @@
     "migrate:refresh": "npm run migrate:undo:all && npm run migrate",
     "seed": "npx sequelize-cli db:seed:all --env development",
     "seed:undo": "npx sequelize-cli db:seed:undo --env development",
-    "seed:undo:all": "npx sequelize-cli db:seed:undo:all --env development"
+    "seed:undo:all": "npx sequelize-cli db:seed:undo:all --env development",
+    "seed:refresh": "npm run seed:undo:all && npm run seed"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

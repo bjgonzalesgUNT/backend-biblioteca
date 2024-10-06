@@ -1,14 +1,14 @@
+import { ApiMethods, ERoutes } from '@/core/api';
+import { PERSON_REPOSITORY } from '@/core/constants';
+import { handlerExceptions } from '@/core/database/handlers';
+import { PaginationDto, RPagination } from '@/core/dto';
+import { PaginationService } from '@/core/pagination/services/pagination.service';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ApiMethods, ApiRoutes } from 'src/core/api';
-import { CreatePersonDto, UpdatePersonDto } from '../dto';
-import { Person } from '../person.entity';
-import { PERSON_REPOSITORY } from './../../../core/constants';
-import { handlerExceptions } from './../../../core/database/handlers';
-import { PaginationDto, RPagination } from './../../../core/dto';
-import { PaginationService } from './../../../core/pagination/services/pagination.service';
+import { CreatePersonDto, UpdatePersonDto } from './dto';
+import { Person } from './entities';
 
 @Injectable()
-export class PersonService {
+export class PeopleService {
   constructor(
     @Inject(PERSON_REPOSITORY) private readonly personRepository: typeof Person,
     private readonly paginationService: PaginationService,
@@ -31,7 +31,7 @@ export class PersonService {
 
     return this.paginationService.create({
       apiMethod: ApiMethods.FIND_ALL,
-      apiRoute: ApiRoutes.PERSON,
+      apiRoute: ERoutes.PEOPLE,
       data: rows,
       total: count,
       page: paginationDto.page,

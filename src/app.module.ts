@@ -3,16 +3,16 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './core/database/database.module';
 import { PaginationModule } from './core/pagination/pagination.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { PersonModule } from './modules/person/person.module';
-import { UserModule } from './modules/user/user.module';
+import { PeopleModule } from './modules/people/people.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
-    UserModule,
+    UsersModule,
     AuthModule,
-    PersonModule,
+    PeopleModule,
     PaginationModule,
   ],
 })

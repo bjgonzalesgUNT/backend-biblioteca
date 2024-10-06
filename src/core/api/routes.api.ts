@@ -1,5 +1,5 @@
-export enum ApiRoutes {
-  USER = 'user',
+export enum ERoutes {
+  USERS = 'users',
   AUTH = 'auth',
-  PERSON = 'person',
+  PEOPLE = 'people',
 }
