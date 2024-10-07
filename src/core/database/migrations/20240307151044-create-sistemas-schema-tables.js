@@ -140,6 +140,7 @@ module.exports = {
         person_id: {
           type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
+          unique: true,
           references: {
             model: 'people',
             key: 'id',

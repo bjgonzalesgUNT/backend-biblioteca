@@ -4,9 +4,17 @@ import {
   ResponsePaginationDto,
 } from '@/common/pagination';
 import { PaginationService } from '@/common/pagination/services/pagination.service';
-import { PERSON_REPOSITORY } from '@/core/constants';
+import {
+  DOCUMENT_ALREADY_EXISTS_MESSAGE,
+  PERSON_REPOSITORY,
+} from '@/core/constants';
 import { handlerExceptions } from '@/core/database/handlers';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePersonDto, UpdatePersonDto } from './dto';
 import { Person } from './entities';
 
@@ -18,6 +26,15 @@ export class PeopleService {
   ) {}
 
   async create(createPersonDto: CreatePersonDto): Promise<Person> {
+    const { document } = createPersonDto;
+
+    const verifyDocument = await this.personRepository.findOne({
+      where: { document },
+    });
+
+    if (verifyDocument)
+      throw new BadRequestException(DOCUMENT_ALREADY_EXISTS_MESSAGE);
+
     try {
       return await this.personRepository.create(createPersonDto);
     } catch (error) {
