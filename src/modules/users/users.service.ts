@@ -1,10 +1,12 @@
+import { ERoutes } from '@/common/enums';
+import { EApiMethods } from '@/common/enums/methods.api';
+import {
+  CreatePaginationDto,
+  PaginationService,
+  ResponsePaginationDto,
+} from '@/common/pagination';
+import { USER_REPOSITORY } from '@/core/constants';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ERoutes } from 'src/core/api';
-import { ApiMethods } from '../../core/api/methods.api';
-import { USER_REPOSITORY } from '../../core/constants';
-import { RPagination } from '../../core/dto';
-import { PaginationDto } from '../../core/dto/pagination/pagination.dto';
-import { PaginationService } from '../../core/pagination/services/pagination.service';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -14,20 +16,22 @@ export class UsersService {
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
   ) {}
 
-  async findAll(paginationDto?: PaginationDto): Promise<RPagination<User>> {
+  async findAllPaginate(
+    createPaginationDto?: CreatePaginationDto,
+  ): Promise<ResponsePaginationDto<User>> {
     const { count, rows } = await this.userRepository.findAndCountAll({
-      ...this.paginationService.generate(paginationDto),
+      ...this.paginationService.generate(createPaginationDto),
     });
 
     if (rows.length === 0) throw new NotFoundException();
 
-    return this.paginationService.create<User>({
-      apiMethod: ApiMethods.FIND_ALL,
+    return this.paginationService.paginate<User>({
+      apiMethod: EApiMethods.FIND_ALL,
       apiRoute: ERoutes.USERS,
       total: count,
       data: rows,
-      page: paginationDto.page,
-      limit: paginationDto.limit,
+      page: createPaginationDto.page,
+      limit: createPaginationDto.limit,
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Person } from '@/modules/people/entities';
-import { Role } from '@/modules/roles/role.entity';
+import { Role } from '@/modules/roles/entities';
 import { User } from '@/modules/users/entities/user.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';

@@ -1,8 +1,11 @@
-import { ApiMethods, ERoutes } from '@/core/api';
+import { EApiMethods, ERoutes } from '@/common/enums';
+import {
+  CreatePaginationDto,
+  ResponsePaginationDto,
+} from '@/common/pagination';
+import { PaginationService } from '@/common/pagination/services/pagination.service';
 import { PERSON_REPOSITORY } from '@/core/constants';
 import { handlerExceptions } from '@/core/database/handlers';
-import { PaginationDto, RPagination } from '@/core/dto';
-import { PaginationService } from '@/core/pagination/services/pagination.service';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePersonDto, UpdatePersonDto } from './dto';
 import { Person } from './entities';
@@ -22,20 +25,22 @@ export class PeopleService {
     }
   }
 
-  async findAll(paginationDto?: PaginationDto): Promise<RPagination<Person>> {
+  async findAllPaginate(
+    createPaginationDto?: CreatePaginationDto,
+  ): Promise<ResponsePaginationDto<Person>> {
     const { count, rows } = await this.personRepository.findAndCountAll({
-      ...this.paginationService.generate(paginationDto),
+      ...this.paginationService.generate(createPaginationDto),
     });
 
     if (rows.length === 0) throw new NotFoundException();
 
-    return this.paginationService.create({
-      apiMethod: ApiMethods.FIND_ALL,
+    return this.paginationService.paginate({
+      apiMethod: EApiMethods.FIND_ALL,
       apiRoute: ERoutes.PEOPLE,
       data: rows,
       total: count,
-      page: paginationDto.page,
-      limit: paginationDto.limit,
+      page: createPaginationDto.page,
+      limit: createPaginationDto.limit,
     });
   }
 

@@ -1,5 +1,5 @@
+import { envs } from '@/core/config';
 import {
-  JWT_KEY,
   ROLE_NOT_AUTHORIZED_MESSAGE,
   USER_NOT_AUTHORIZED_MESSAGE,
   USER_REPOSITORY,
@@ -7,7 +7,6 @@ import {
 import { UserDB } from '@/modules/users/dto';
 import { User } from '@/modules/users/entities';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { QueryTypes } from 'sequelize';
@@ -17,12 +16,11 @@ import { IPayload } from '../interfaces';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: typeof User,
-    private readonly configService: ConfigService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get(JWT_KEY),
+      secretOrKey: envs.jwtKey,
     });
   }
 

@@ -1,4 +1,4 @@
-export enum ApiMethods {
+export enum EApiMethods {
   FIND_ALL = 'find-all',
   FIND_ALL_PAGINATE = 'find-all-paginate',
   CREATE = 'create',

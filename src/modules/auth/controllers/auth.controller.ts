@@ -1,4 +1,4 @@
-import { ERoutes } from '@/core/api';
+import { ERoutes } from '@/common/enums';
 import { CreateUserDto, UserDB } from '@/modules/users/dto';
 import { User } from '@/modules/users/entities';
 import { Body, Controller, Patch, Post, UseGuards } from '@nestjs/common';

@@ -10,16 +10,24 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
 export class Role extends Model<Role> {
   @ApiProperty()
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   })
-  rol_id: number;
+  id: number;
+
+  @ApiProperty()
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  name: string;
 
   @ApiProperty()
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  rol_nombre: string;
+  description: string;
 }

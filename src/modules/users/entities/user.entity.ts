@@ -1,5 +1,14 @@
+import { Person } from '@/modules/people/entities';
+import { Role } from '@/modules/roles/entities';
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 
 @Table({
   schema: 'sistemas',
@@ -33,6 +42,7 @@ export class User extends Model<User> {
   password: string;
 
   @ApiProperty()
+  @ForeignKey(() => Person)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -41,9 +51,16 @@ export class User extends Model<User> {
   person_id: number;
 
   @ApiProperty()
+  @ForeignKey(() => Role)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   role_id: number;
+
+  @BelongsTo(() => Person)
+  person: Person;
+
+  @BelongsTo(() => Role)
+  role: Role;
 }

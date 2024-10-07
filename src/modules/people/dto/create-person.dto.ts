@@ -1,4 +1,4 @@
-import { textTransform } from '@/core/helpers';
+import { textTransform } from '@/common/helpers';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, Matches } from 'class-validator';

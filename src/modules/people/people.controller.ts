@@ -1,3 +1,8 @@
+import { EApiMethods, ERoutes } from '@/common/enums';
+import {
+  CreatePaginationDto,
+  ResponsePaginationDto,
+} from '@/common/pagination';
 import {
   Body,
   Controller,
@@ -11,9 +16,7 @@ import {
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/modules/auth/decorators';
 import { ERoles } from 'src/modules/auth/enums';
-import { ApiMethods, ERoutes } from '../../core/api';
-import { PaginationDto, RPagination } from '../../core/dto';
-import { ParseIdPipe } from '../../core/pipes/parse-id.pipe';
+import { ParseIdPipe } from '../../common/pipes/parse-id.pipe';
 import { CreatePersonDto, UpdatePersonDto } from './dto';
 import { Person } from './entities/person.entity';
 import { PeopleService } from './people.service';
@@ -23,21 +26,21 @@ import { PeopleService } from './people.service';
 export class PeopleController {
   constructor(private readonly peopleService: PeopleService) {}
 
-  @Post(ApiMethods.CREATE)
+  @Post(EApiMethods.CREATE)
   @ApiCreatedResponse({ type: Person })
   @Auth(ERoles.ADMIN)
   create(@Body() createPersonDto: CreatePersonDto) {
     return this.peopleService.create(createPersonDto);
   }
 
-  @Get(ApiMethods.FIND_ALL)
+  @Get(EApiMethods.FIND_ALL_PAGINATE)
   @Auth(ERoles.ADMIN)
-  @ApiOkResponse({ type: RPagination })
-  findAll(@Query() paginationDto?: PaginationDto) {
-    return this.peopleService.findAll(paginationDto);
+  @ApiOkResponse({ type: ResponsePaginationDto })
+  findAllPaginate(@Query() createPaginationDto?: CreatePaginationDto) {
+    return this.peopleService.findAllPaginate(createPaginationDto);
   }
 
-  @Patch(ApiMethods.UPDATE)
+  @Patch(EApiMethods.UPDATE)
   @Auth(ERoles.ADMIN, ERoles.USER)
   @ApiOkResponse({ type: Person })
   update(
@@ -47,7 +50,7 @@ export class PeopleController {
     return this.peopleService.update(id, updatePersonDto);
   }
 
-  @Delete(ApiMethods.DELETE)
+  @Delete(EApiMethods.DELETE)
   @Auth(ERoles.ADMIN)
   @ApiOkResponse({ type: Boolean })
   remove(@Param('id', ParseIdPipe) id: number) {

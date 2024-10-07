@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class RPagination<T> {
+export class ResponsePaginationDto<T> {
   @ApiProperty()
   count: number;
 

@@ -1,4 +1,4 @@
-import { PaginationModule } from '@/core/pagination/pagination.module';
+import { PaginationModule } from '@/common/pagination/pagination.module';
 import { Module } from '@nestjs/common';
 import { AuthModule } from '../auth/auth.module';
 import { PeopleController } from './people.controller';
