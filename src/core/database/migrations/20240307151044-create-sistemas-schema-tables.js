@@ -126,7 +126,7 @@ module.exports = {
           autoIncrement: true,
         },
 
-        email: {
+        username: {
           type: Sequelize.DataTypes.STRING,
           unique: true,
           allowNull: false,
@@ -140,6 +140,7 @@ module.exports = {
         person_id: {
           type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
+          unique: true,
           references: {
             model: 'people',
             key: 'id',

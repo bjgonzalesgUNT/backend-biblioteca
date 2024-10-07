@@ -1,10 +1,10 @@
+import { UserDB } from '@/modules/users/dto';
 import { ExecutionContext, createParamDecorator } from '@nestjs/common';
-import { User } from 'src/modules/user/user.entity';
 
 export const GetUser = createParamDecorator(
-  (data: unknown, ctx: ExecutionContext) => {
+  (data: unknown, ctx: ExecutionContext): UserDB => {
     const request = ctx.switchToHttp().getRequest();
-    const user = request.user as User;
+    const user = request.user as UserDB;
     return user;
   },
 );
