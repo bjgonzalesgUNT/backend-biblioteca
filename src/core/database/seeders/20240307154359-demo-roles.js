@@ -1,7 +1,5 @@
 'use strict';
 
-const sequelize = require('sequelize');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,18 +7,28 @@ module.exports = {
       { schema: 'sistemas', tableName: 'roles' },
       [
         {
-          rol_nombre: 'user'.toUpperCase(),
-          rol_descripcion: 'usuario'.toUpperCase(),
+          name: 'admin',
+          description: 'admin',
+        },
+        {
+          name: 'user',
+          description: 'user',
+        },
+        {
+          name: 'librarian',
+          description: 'librarian',
         },
       ],
     );
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete(
-      { schema: 'sistemas', tableName: 'roles' },
-      null,
-      {},
+    await queryInterface.sequelize.query(
+      'ALTER SEQUENCE sistemas.roles_id_seq RESTART WITH 1;',
+    );
+
+    await queryInterface.sequelize.query(
+      'TRUNCATE TABLE sistemas.roles CASCADE;',
     );
   },
 };

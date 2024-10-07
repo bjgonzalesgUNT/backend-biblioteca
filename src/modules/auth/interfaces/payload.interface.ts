@@ -1,3 +1,5 @@
 export interface IPayload {
-  usu_email: string;
+  id: number;
+  username: string;
+  role: string;
 }
