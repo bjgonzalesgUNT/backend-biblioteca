@@ -244,12 +244,12 @@ module.exports = {
 
     // *Create loan estatus enums
     await queryInterface.sequelize.query(
-      "CREATE TYPE LOAN_STATUS AS ENUM ('active', 'inactive')",
+      "CREATE TYPE biblioteca.LOAN_STATUS AS ENUM ('active', 'inactive')",
     );
 
     // *Create loaned status enum
     await queryInterface.sequelize.query(
-      "CREATE TYPE LOANED_STATUS AS ENUM ('loaned', 'returned')",
+      "CREATE TYPE biblioteca.LOANED_STATUS AS ENUM ('loaned', 'returned')",
     );
 
     // *Create table loans
@@ -298,11 +298,11 @@ module.exports = {
           type: Sequelize.DATE,
         },
         loan_status: {
-          type: 'LOAN_STATUS',
+          type: 'biblioteca.LOAN_STATUS',
           allowNull: false,
         },
         loaned_status: {
-          type: 'LOANED_STATUS',
+          type: 'biblioteca.LOANED_STATUS',
           allowNull: false,
         },
         ...timestamp,
@@ -396,9 +396,9 @@ module.exports = {
     });
 
     // *Drop loaned status enum
-    await queryInterface.sequelize.query('DROP TYPE LOANED_STATUS');
+    await queryInterface.sequelize.query('DROP TYPE biblioteca.LOANED_STATUS');
 
     // *Drop loan estatus enums
-    await queryInterface.sequelize.query('DROP TYPE LOAN_STATUS');
+    await queryInterface.sequelize.query('DROP TYPE biblioteca.LOAN_STATUS');
   },
 };
