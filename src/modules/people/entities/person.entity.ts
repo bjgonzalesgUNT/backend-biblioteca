@@ -58,9 +58,9 @@ export class Person extends Model<Person> {
 
   @ApiProperty()
   @Column({
-    type: DataType.STRING,
+    type: DataType.DATEONLY,
   })
-  date: string;
+  date: Date;
 
   @ApiProperty()
   @Column({

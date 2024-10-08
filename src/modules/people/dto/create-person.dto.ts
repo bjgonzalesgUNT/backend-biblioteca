@@ -36,7 +36,7 @@ export class CreatePersonDto {
 
   @ApiPropertyOptional()
   @IsNotEmpty()
-  date: string;
+  date: Date;
 
   @ApiProperty()
   @IsNotEmpty()

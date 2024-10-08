@@ -36,7 +36,10 @@ export class PeopleService {
       throw new BadRequestException(DOCUMENT_ALREADY_EXISTS_MESSAGE);
 
     try {
-      return await this.personRepository.create(createPersonDto);
+      return await this.personRepository.create({
+        ...createPersonDto,
+        date: new Date(createPersonDto.date),
+      });
     } catch (error) {
       handlerExceptions(error);
     }
@@ -69,12 +72,23 @@ export class PeopleService {
 
   async update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
     const data = await this.findOne(id);
+  
+    const { surnames, names, telephone, gender, date, address } = updatePersonDto;
+  
     try {
-      return await data.update(updatePersonDto);
+      return await data.update({
+        surnames,
+        names,
+        telephone,
+        gender,
+        date: new Date(date),
+        address,
+      });
     } catch (error) {
       handlerExceptions(error);
     }
   }
+  
 
   async remove(id: number): Promise<boolean> {
     const data = await this.findOne(id);
