@@ -44,4 +44,14 @@ export class UsersService {
       limit,
     });
   }
+
+  async changeStatus(userId: number): Promise<void> {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      paranoid: false,
+    });
+
+    if (user.deletedAt) await user.restore();
+    else await user.destroy();
+  }
 }

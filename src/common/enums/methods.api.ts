@@ -5,4 +5,5 @@ export enum EApiMethods {
   FIND_ONE = 'find-one/:id',
   UPDATE = 'update/:id',
   DELETE = 'delete/:id',
+  CHANGE_STATUS = 'change-status/:id',
 }
