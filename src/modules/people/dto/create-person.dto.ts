@@ -1,6 +1,6 @@
 import { textTransform } from '@/common/helpers';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, Matches } from 'class-validator';
 
 export class CreatePersonDto {
@@ -34,9 +34,11 @@ export class CreatePersonDto {
   @IsNotEmpty()
   gender: string;
 
+  // Se transforma el campo date de string a Date utilizando Type
   @ApiPropertyOptional()
   @IsNotEmpty()
-  date: Date;
+  @Type(() => Date)  // Este decorador transformará el string a Date
+  date: string;
 
   @ApiProperty()
   @IsNotEmpty()

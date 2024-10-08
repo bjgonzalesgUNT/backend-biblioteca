@@ -71,24 +71,33 @@ export class PeopleService {
   }
 
   async update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
-    const data = await this.findOne(id);
+    const existingPerson = await this.findOne(id);
   
-    const { surnames, names, telephone, gender, date, address } = updatePersonDto;
+    if (updatePersonDto.document) {
+      if (updatePersonDto.document !== existingPerson.document) {
+        const personData = await this.personRepository.findOne({
+          where: { document: updatePersonDto.document },
+        });
+  
+        if (personData) {
+          throw new BadRequestException(DOCUMENT_ALREADY_EXISTS_MESSAGE);
+        }
+      }
+    }
   
     try {
-      return await data.update({
-        surnames,
-        names,
-        telephone,
-        gender,
-        date: new Date(date),
-        address,
+      return await existingPerson.update({
+        surnames: updatePersonDto.surnames ?? existingPerson.surnames,
+        names: updatePersonDto.names ?? existingPerson.names,
+        telephone: updatePersonDto.telephone ?? existingPerson.telephone,
+        gender: updatePersonDto.gender ?? existingPerson.gender,
+        date: updatePersonDto.date ? new Date(updatePersonDto.date) : existingPerson.date,
+        address: updatePersonDto.address ?? existingPerson.address,
       });
     } catch (error) {
       handlerExceptions(error);
     }
   }
-  
 
   async remove(id: number): Promise<boolean> {
     const data = await this.findOne(id);
