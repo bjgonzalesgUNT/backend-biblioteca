@@ -4,7 +4,7 @@ import {
   ResponsePaginationDto,
 } from '@/common/pagination/dtos';
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../auth/decorators';
 import { ERoles } from '../auth/enums';
 import { UsersService } from './users.service';
@@ -16,7 +16,7 @@ export class UsersController {
 
   @Get(EApiMethods.FIND_ALL_PAGINATE)
   @Auth(ERoles.ADMIN)
-  @ApiResponse({ type: ResponsePaginationDto })
+  @ApiOkResponse({ type: ResponsePaginationDto })
   findAllPaginate(@Query() createPaginationDto?: CreatePaginationDto) {
     return this.usersService.findAllPaginate(createPaginationDto);
   }

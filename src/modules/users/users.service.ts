@@ -1,12 +1,13 @@
-import { ERoutes } from '@/common/enums';
-import { EApiMethods } from '@/common/enums/methods.api';
+import { EApiMethods, ERoutes } from '@/common/enums';
 import {
   CreatePaginationDto,
   PaginationService,
   ResponsePaginationDto,
 } from '@/common/pagination';
-import { USER_REPOSITORY } from '@/core/constants';
+import { USER_REPOSITORY, USERS_NOT_FOUND_MESSAGE } from '@/core/constants';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { QueryTypes } from 'sequelize';
+import { UserDB } from './dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -18,20 +19,29 @@ export class UsersService {
 
   async findAllPaginate(
     createPaginationDto?: CreatePaginationDto,
-  ): Promise<ResponsePaginationDto<User>> {
-    const { count, rows } = await this.userRepository.findAndCountAll({
-      ...this.paginationService.generate(createPaginationDto),
-    });
+  ): Promise<any> {
+    const { limit, offset } =
+      this.paginationService.generate(createPaginationDto);
 
-    if (rows.length === 0) throw new NotFoundException();
+    const [{ data }] = (await this.userRepository.sequelize.query(
+      'select * from sistemas.fn_get_users_paginate(?,?)',
+      {
+        type: QueryTypes.SELECT,
+        replacements: [limit, offset],
+      },
+    )) as [{ data: ResponsePaginationDto<UserDB> }];
 
-    return this.paginationService.paginate<User>({
-      apiMethod: EApiMethods.FIND_ALL,
-      apiRoute: ERoutes.USERS,
+    const { rows, count } = data;
+
+    if (!rows) throw new NotFoundException(USERS_NOT_FOUND_MESSAGE);
+
+    return this.paginationService.paginate({
       total: count,
-      data: rows,
       page: createPaginationDto.page,
-      limit: createPaginationDto.limit,
+      apiMethod: EApiMethods.FIND_ALL_PAGINATE,
+      apiRoute: ERoutes.USERS,
+      data: rows,
+      limit,
     });
   }
 }

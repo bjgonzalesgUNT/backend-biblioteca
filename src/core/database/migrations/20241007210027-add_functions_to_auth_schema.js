@@ -60,6 +60,7 @@ module.exports = {
               inner join sistemas.people p 
               on u.person_id = p.id
               order by u."createdAt" desc
+              limit _limit offset _offset
             ) as subquery
           ) 
         );
