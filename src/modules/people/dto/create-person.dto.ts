@@ -1,7 +1,7 @@
 import { textTransform } from '@/common/helpers';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsNotEmpty, Matches } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsDate, IsNotEmpty, Matches } from 'class-validator';
 
 export class CreatePersonDto {
   @ApiProperty()
@@ -36,7 +36,9 @@ export class CreatePersonDto {
 
   @ApiPropertyOptional()
   @IsNotEmpty()
-  date: string;
+  @Type(() => Date)
+  @IsDate()
+  date: Date;
 
   @ApiProperty()
   @IsNotEmpty()

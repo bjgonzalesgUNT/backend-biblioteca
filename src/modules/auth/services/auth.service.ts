@@ -1,4 +1,8 @@
-import { CREDENTIALS_INVALID_MESSAGE, USER_REPOSITORY } from '@/core/constants';
+import {
+  CREDENTIALS_INVALID_MESSAGE,
+  USER_NOT_AUTHORIZED_MESSAGE,
+  USER_REPOSITORY,
+} from '@/core/constants';
 import { CreateUserDto, UserDB } from '@/modules/users/dto';
 import { User } from '@/modules/users/entities';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
@@ -71,6 +75,8 @@ export class AuthService {
     const { username } = loginDto;
 
     const user = await this.findOneUser(username);
+
+    if (!user) throw new UnauthorizedException(USER_NOT_AUTHORIZED_MESSAGE);
 
     const match = await this.comparePassword(loginDto.password, user.password);
 
