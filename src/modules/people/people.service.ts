@@ -1,21 +1,13 @@
-import { EApiMethods, ERoutes } from '@/common/enums';
-import {
-  CreatePaginationDto,
-  ResponsePaginationDto,
-} from '@/common/pagination';
 import { PaginationService } from '@/common/pagination/services/pagination.service';
 import {
   DOCUMENT_ALREADY_EXISTS_MESSAGE,
   PERSON_REPOSITORY,
 } from '@/core/constants';
 import { handlerExceptions } from '@/core/database/handlers';
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { CreatePersonDto, UpdatePersonDto } from './dto';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { QueryTypes } from 'sequelize';
+import { UserDB } from '../users/dto';
+import { CreatePersonDto, PersonDB, UpdatePersonDto } from './dto';
 import { Person } from './entities';
 
 @Injectable()
@@ -25,87 +17,49 @@ export class PeopleService {
     private readonly paginationService: PaginationService,
   ) {}
 
-  async create(createPersonDto: CreatePersonDto): Promise<Person> {
+  async create(createPersonDto: CreatePersonDto): Promise<PersonDB> {
     const { document } = createPersonDto;
 
-    const verifyDocument = await this.personRepository.findOne({
-      where: { document },
-    });
+    const verifyDocument = await this.verifyDocument(document);
 
     if (verifyDocument)
       throw new BadRequestException(DOCUMENT_ALREADY_EXISTS_MESSAGE);
 
     try {
-      return await this.personRepository.create({
-        ...createPersonDto,
-        date: new Date(createPersonDto.date),
-      });
+      await this.personRepository.create(createPersonDto);
+      return await this.findOneByDocument(document);
     } catch (error) {
       handlerExceptions(error);
     }
   }
 
-  async findAllPaginate(
-    createPaginationDto?: CreatePaginationDto,
-  ): Promise<ResponsePaginationDto<Person>> {
-    const { count, rows } = await this.personRepository.findAndCountAll({
-      ...this.paginationService.generate(createPaginationDto),
-    });
+  async update(
+    user: UserDB,
+    updatePersonDto: UpdatePersonDto,
+  ): Promise<PersonDB> {
+    const { document } = user;
 
-    if (rows.length === 0) throw new NotFoundException();
+    const person = await this.personRepository.findOne({ where: { document } });
 
-    return this.paginationService.paginate({
-      apiMethod: EApiMethods.FIND_ALL,
-      apiRoute: ERoutes.PEOPLE,
-      data: rows,
-      total: count,
-      page: createPaginationDto.page,
-      limit: createPaginationDto.limit,
-    });
+    await person.update(updatePersonDto);
+
+    return await this.findOneByDocument(document);
   }
 
-  async findOne(id: number): Promise<Person> {
-    const data = await this.personRepository.findByPk(id);
-    if (!data) throw new NotFoundException();
-    return data;
+  private async findOneByDocument(document: string): Promise<PersonDB> {
+    const [person] = (await this.personRepository.sequelize.query(
+      'SELECT * FROM sistemas.fn_get_person_by_document(?)',
+      {
+        type: QueryTypes.SELECT,
+        replacements: [document],
+      },
+    )) as [PersonDB];
+
+    return person;
   }
 
-  async update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
-    const existingPerson = await this.findOne(id);
-  
-    if (updatePersonDto.document) {
-      if (updatePersonDto.document !== existingPerson.document) {
-        const personData = await this.personRepository.findOne({
-          where: { document: updatePersonDto.document },
-        });
-  
-        if (personData) {
-          throw new BadRequestException(DOCUMENT_ALREADY_EXISTS_MESSAGE);
-        }
-      }
-    }
-  
-    try {
-      return await existingPerson.update({
-        surnames: updatePersonDto.surnames ?? existingPerson.surnames,
-        names: updatePersonDto.names ?? existingPerson.names,
-        telephone: updatePersonDto.telephone ?? existingPerson.telephone,
-        gender: updatePersonDto.gender ?? existingPerson.gender,
-        date: updatePersonDto.date ? new Date(updatePersonDto.date) : existingPerson.date,
-        address: updatePersonDto.address ?? existingPerson.address,
-      });
-    } catch (error) {
-      handlerExceptions(error);
-    }
-  }
-
-  async remove(id: number): Promise<boolean> {
-    const data = await this.findOne(id);
-    try {
-      await data.destroy();
-      return true;
-    } catch (error) {
-      handlerExceptions(error);
-    }
+  private async verifyDocument(document: string): Promise<boolean> {
+    const person = await this.personRepository.findOne({ where: { document } });
+    return person ? true : false;
   }
 }

@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table({
@@ -44,27 +44,28 @@ export class Person extends Model<Person> {
   })
   document: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Column({
     type: DataType.STRING,
   })
-  telephone: string;
+  telephone?: string;
 
   @ApiProperty()
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   gender: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Column({
-    type: DataType.DATEONLY,
+    type: DataType.DATE,
   })
-  date: Date;
+  date?: Date;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Column({
     type: DataType.STRING,
   })
-  address: string;
+  address?: string;
 }
