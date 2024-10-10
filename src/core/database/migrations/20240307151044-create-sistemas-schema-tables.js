@@ -204,7 +204,6 @@ module.exports = {
 
         icon: {
           type: Sequelize.DataTypes.STRING,
-          allowNull: false,
         },
 
         createdAt: {

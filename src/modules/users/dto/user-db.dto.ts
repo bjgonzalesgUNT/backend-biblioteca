@@ -20,5 +20,8 @@ export class UserDB {
   role: string;
 
   @ApiProperty()
+  pages: string[];
+
+  @ApiProperty()
   status: boolean;
 }
