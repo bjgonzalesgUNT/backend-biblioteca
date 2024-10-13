@@ -1,12 +1,11 @@
 import { ERoutes } from '@/common/enums';
 import { CreateUserDto, UserDB } from '@/modules/users/dto';
-import { User } from '@/modules/users/entities';
 import { Body, Controller, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../decorators';
 import { GetUser } from '../decorators/get-user.decorator';
-import { ChangePasswordDto } from '../dto';
+import { AuthResponseDto, ChangePasswordDto } from '../dto';
 import { LoginDto } from '../dto/login.dto';
 import { AuthService } from '../services/auth.service';
 
@@ -17,13 +16,14 @@ export class AuthController {
 
   @Post('login')
   @ApiBody({ type: LoginDto })
+  @ApiOkResponse({ type: AuthResponseDto })
   @UseGuards(AuthGuard('local'))
   login(@GetUser() user: UserDB) {
     return this.authService.login(user);
   }
 
   @Post('signup')
-  @ApiOkResponse({ type: User })
+  @ApiOkResponse({ type: AuthResponseDto })
   singUp(@Body() createUserDto: CreateUserDto) {
     return this.authService.singUp(createUserDto);
   }

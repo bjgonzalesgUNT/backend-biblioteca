@@ -27,7 +27,7 @@ module.exports = {
       {
         name: 'Usuarios',
         description: 'users',
-        path: '/users',
+        path: '/dashboard/users',
       },
     ];
 

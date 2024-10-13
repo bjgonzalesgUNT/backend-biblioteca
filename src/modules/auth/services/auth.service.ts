@@ -1,8 +1,4 @@
-import {
-  CREDENTIALS_INVALID_MESSAGE,
-  USER_NOT_AUTHORIZED_MESSAGE,
-  USER_REPOSITORY,
-} from '@/core/constants';
+import { CREDENTIALS_INVALID_MESSAGE, USER_REPOSITORY } from '@/core/constants';
 import { CreateUserDto, UserDB } from '@/modules/users/dto';
 import { User } from '@/modules/users/entities';
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
@@ -30,7 +26,7 @@ export class AuthService {
     return { user, token };
   }
 
-  async singUp(createUserDto: CreateUserDto) {
+  async singUp(createUserDto: CreateUserDto): Promise<UserDB> {
     const { username, password, person_id, role_id } = createUserDto;
 
     const verifyUser = await this.findOneUser(username);
@@ -46,13 +42,7 @@ export class AuthService {
 
     const userDB = await this.findOneUserByUsername(username);
 
-    const token = this.generateToken({
-      id: userDB.id,
-      username,
-      role: userDB.role,
-    });
-
-    return { user: userDB, token };
+    return userDB;
   }
 
   async changePassword(
@@ -76,7 +66,7 @@ export class AuthService {
 
     const user = await this.findOneUser(username);
 
-    if (!user) throw new UnauthorizedException(USER_NOT_AUTHORIZED_MESSAGE);
+    if (!user) throw new UnauthorizedException(CREDENTIALS_INVALID_MESSAGE);
 
     const match = await this.comparePassword(loginDto.password, user.password);
 
