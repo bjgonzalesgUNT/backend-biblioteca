@@ -25,6 +25,7 @@
     "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --env development",
     "migrate:refresh": "npm run migrate:undo:all && npm run migrate",
     "migrate:refresh:seed": "npm run migrate:undo:all && npm run migrate && npm run seed",
+    "migrate:seed": "npm run migrate && npm run seed",
     "seed": "npx sequelize-cli db:seed:all --env development",
     "seed:undo": "npx sequelize-cli db:seed:undo --env development",
     "seed:undo:all": "npx sequelize-cli db:seed:undo:all --env development",
