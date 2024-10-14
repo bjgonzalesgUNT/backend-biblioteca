@@ -1,5 +1,5 @@
 import { EApiMethods, ERoutes } from '@/common/enums';
-import { Body, Controller, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, GetUser } from 'src/modules/auth/decorators';
 import { ERoles } from 'src/modules/auth/enums';
@@ -18,6 +18,13 @@ export class PeopleController {
   @Auth(ERoles.ADMIN)
   create(@Body() createPersonDto: CreatePersonDto) {
     return this.peopleService.create(createPersonDto);
+  }
+
+  @Get('find-one-by-document')
+  @ApiOkResponse({ type: Person })
+  @Auth()
+  findOne(@GetUser() user: UserDB) {
+    return this.peopleService.findOne(user);
   }
 
   @Patch('update')
