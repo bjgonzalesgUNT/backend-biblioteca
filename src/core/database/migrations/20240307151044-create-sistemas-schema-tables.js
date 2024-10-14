@@ -48,7 +48,7 @@ module.exports = {
         },
 
         date: {
-          type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.DATEONLY,
         },
 
         address: {
@@ -204,7 +204,6 @@ module.exports = {
 
         icon: {
           type: Sequelize.DataTypes.STRING,
-          allowNull: false,
         },
 
         createdAt: {

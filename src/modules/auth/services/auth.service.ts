@@ -26,7 +26,7 @@ export class AuthService {
     return { user, token };
   }
 
-  async singUp(createUserDto: CreateUserDto) {
+  async singUp(createUserDto: CreateUserDto): Promise<UserDB> {
     const { username, password, person_id, role_id } = createUserDto;
 
     const verifyUser = await this.findOneUser(username);
@@ -42,13 +42,7 @@ export class AuthService {
 
     const userDB = await this.findOneUserByUsername(username);
 
-    const token = this.generateToken({
-      id: userDB.id,
-      username,
-      role: userDB.role,
-    });
-
-    return { user: userDB, token };
+    return userDB;
   }
 
   async changePassword(
@@ -71,6 +65,8 @@ export class AuthService {
     const { username } = loginDto;
 
     const user = await this.findOneUser(username);
+
+    if (!user) throw new UnauthorizedException(CREDENTIALS_INVALID_MESSAGE);
 
     const match = await this.comparePassword(loginDto.password, user.password);
 

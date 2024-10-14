@@ -1,7 +1,7 @@
 import { textTransform } from '@/common/helpers';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsNotEmpty, Matches } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsDate, IsNotEmpty, IsOptional, Matches } from 'class-validator';
 
 export class CreatePersonDto {
   @ApiProperty()
@@ -21,13 +21,14 @@ export class CreatePersonDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Matches(/^[0-9]{8,10}$/, {
-    message: 'El documento debe tener entre 8 y 10 dígitos',
+  @Transform(({ value }) => String(value))
+  @Matches(/^[0-9]{8,12}$/, {
+    message: 'El documento debe tener entre 8 y 12 dígitos',
   })
   document: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiPropertyOptional()
+  @IsOptional()
   telephone: string;
 
   @ApiProperty()
@@ -35,10 +36,12 @@ export class CreatePersonDto {
   gender: string;
 
   @ApiPropertyOptional()
-  @IsNotEmpty()
-  date: string;
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  date: Date;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiPropertyOptional()
+  @IsOptional()
   address: string;
 }

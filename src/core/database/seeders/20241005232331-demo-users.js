@@ -7,7 +7,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const t = await queryInterface.sequelize.transaction();
 
-    const person = {
+    const joseph = {
       surnames: 'GONZALES GUTIERREZ',
       names: 'BRANDON JOSEPH',
       nacionality: 'PE',
@@ -18,22 +18,41 @@ module.exports = {
       address: 'Victor Raul Mz 06 Lt 04',
     };
 
+    const paulo = {
+      surnames: 'ALIAGA CARBAJAL',
+      names: 'PAULO ADRIAN',
+      nacionality: 'PE',
+      document: '70582843',
+      telephone: '942233662',
+      gender: 'M',
+      date: '2002-06-01',
+      address: 'Pablo Tuch 570',
+    };
+
     try {
       await queryInterface.bulkInsert(
         {
           schema: 'sistemas',
           tableName: 'people',
         },
-        [person],
+        [joseph, paulo],
       );
 
       const salt = bcrypt.genSaltSync(10);
-      const password = bcrypt.hashSync(person.document, salt);
+      const password1 = bcrypt.hashSync(joseph.document, salt);
+      const password2 = bcrypt.hashSync(paulo.document, salt);
 
-      const newUser = {
-        username: person.document,
-        password,
+      const newUser1 = {
+        username: joseph.document,
+        password: password1,
         person_id: 1,
+        role_id: 1,
+      };
+
+      const newUser2 = {
+        username: paulo.document,
+        password: password2,
+        person_id: 2,
         role_id: 1,
       };
 
@@ -42,7 +61,7 @@ module.exports = {
           schema: 'sistemas',
           tableName: 'users',
         },
-        [newUser],
+        [newUser1, newUser2],
       );
 
       await t.commit();

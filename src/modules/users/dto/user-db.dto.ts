@@ -14,7 +14,13 @@ export class UserDB {
   surnames: string;
 
   @ApiProperty()
+  document: string;
+
+  @ApiProperty()
   role: string;
+
+  @ApiProperty()
+  pages: string[];
 
   @ApiProperty()
   status: boolean;
