@@ -12,4 +12,3 @@ export const USER_ROLE_REPOSITORY = 'USER_ROLE_REPOSITORY';
 
 export const BEARER_KEY = 'Bearer';
 export const ROLES_KEY = 'ROLES';
-
