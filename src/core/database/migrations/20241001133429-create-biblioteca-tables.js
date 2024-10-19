@@ -1,5 +1,7 @@
 'use strict';
 
+const sequelize = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -79,11 +81,11 @@ module.exports = {
       },
     );
 
-    // *Create table categories
+    // *Summary 1
     await queryInterface.createTable(
       {
         schema,
-        tableName: 'categories',
+        tableName: 'summary_1',
       },
       {
         id: {
@@ -91,13 +93,86 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
-        name: {
+        code: {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true,
         },
         description: {
           type: Sequelize.STRING,
+          allowNull: false,
+        },
+        ...timestamp,
+      },
+    );
+
+    // *Summary 2
+    await queryInterface.createTable(
+      {
+        schema,
+        tableName: 'summary_2',
+      },
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        summary_1_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_1',
+            },
+            key: 'id',
+          },
+        },
+        code: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        description: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        ...timestamp,
+      },
+    );
+
+    // *Summary 3
+    await queryInterface.createTable(
+      {
+        schema,
+        tableName: 'summary_3',
+      },
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        summary_2_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_2',
+            },
+            key: 'id',
+          },
+        },
+        code: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        description: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         ...timestamp,
       },
@@ -119,6 +194,17 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true,
+        },
+        deway_id: {
+          type: sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_3',
+            },
+            key: 'id',
+          },
         },
         author_id: {
           type: Sequelize.INTEGER,
@@ -176,39 +262,6 @@ module.exports = {
       },
     );
 
-    // *Create table books_categories
-    await queryInterface.createTable(
-      {
-        schema,
-        tableName: 'books_categories',
-      },
-      {
-        book_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'books',
-            },
-            key: 'id',
-          },
-        },
-        category_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'categories',
-            },
-            key: 'id',
-          },
-        },
-        ...timestamp,
-      },
-    );
-
     // *Create table co-authorship
     await queryInterface.createTable(
       {
@@ -241,164 +294,44 @@ module.exports = {
         ...timestamp,
       },
     );
-
-    // *Create loan estatus enums
-    await queryInterface.sequelize.query(
-      "CREATE TYPE biblioteca.LOAN_STATUS AS ENUM ('active', 'inactive')",
-    );
-
-    // *Create loaned status enum
-    await queryInterface.sequelize.query(
-      "CREATE TYPE biblioteca.LOANED_STATUS AS ENUM ('loaned', 'returned')",
-    );
-
-    // *Create table loans
-    await queryInterface.createTable(
-      {
-        schema,
-        tableName: 'loans',
-      },
-      {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        book_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: {
-              schema,
-              tableName: 'books',
-            },
-            key: 'id',
-          },
-        },
-        user_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: {
-              schema: 'sistemas',
-              tableName: 'users',
-            },
-            key: 'id',
-          },
-        },
-        loaned_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        devolution_date: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        returned_at: {
-          type: Sequelize.DATE,
-        },
-        loan_status: {
-          type: 'biblioteca.LOAN_STATUS',
-          allowNull: false,
-        },
-        loaned_status: {
-          type: 'biblioteca.LOANED_STATUS',
-          allowNull: false,
-        },
-        ...timestamp,
-      },
-    );
-
-    // *Create table penalties
-    await queryInterface.createTable(
-      {
-        schema,
-        tableName: 'penalties',
-      },
-      {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        loan_id: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: {
-              schema,
-              tableName: 'loans',
-            },
-            key: 'id',
-          },
-        },
-        description: {
-          type: Sequelize.STRING,
-        },
-        amount: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
-        },
-        ...timestamp,
-      },
-    );
   },
 
   async down(queryInterface, Sequelize) {
     const schema = 'biblioteca';
 
-    // *Drop table penalties
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'penalties',
-    });
-
-    // *Drop table loans
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'loans',
-    });
-
-    // *Drop table co-authorship
     await queryInterface.dropTable({
       schema,
       tableName: 'co_authorship',
     });
 
-    // *Drop table books_categories
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'books_categories',
-    });
-
-    // *Drop table books
     await queryInterface.dropTable({
       schema,
       tableName: 'books',
     });
 
-    // *Drop table categories
     await queryInterface.dropTable({
       schema,
-      tableName: 'categories',
+      tableName: 'summary_3',
     });
 
-    // *Drop table editorial
+    await queryInterface.dropTable({
+      schema,
+      tableName: 'summary_2',
+    });
+
+    await queryInterface.dropTable({
+      schema,
+      tableName: 'summary_1',
+    });
+
     await queryInterface.dropTable({
       schema,
       tableName: 'editorial',
     });
 
-    // *Drop table authors
     await queryInterface.dropTable({
       schema,
       tableName: 'authors',
     });
-
-    // *Drop loaned status enum
-    await queryInterface.sequelize.query('DROP TYPE biblioteca.LOANED_STATUS');
-
-    // *Drop loan estatus enums
-    await queryInterface.sequelize.query('DROP TYPE biblioteca.LOAN_STATUS');
   },
 };

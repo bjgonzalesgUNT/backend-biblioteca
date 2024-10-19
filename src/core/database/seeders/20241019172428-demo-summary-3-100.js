@@ -1,0 +1,295 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
+      {
+        schema: 'biblioteca',
+        tableName: 'summary_3',
+      },
+      [
+        {
+          summary_2_id: 11,
+          code: '101',
+          description: 'Teoría de la filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '102',
+          description: 'Miscelánea de filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '103',
+          description: 'Diccionario de filosofía',
+        },
+        { summary_2_id: 11, code: '104', description: '-' },
+        {
+          summary_2_id: 11,
+          code: '105',
+          description: 'Publicaciones en serie de filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '106',
+          description: 'Organizaciones en filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '107',
+          description: 'Educación, investigación en filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '108',
+          description: 'Clases de personas en filosofía',
+        },
+        {
+          summary_2_id: 11,
+          code: '109',
+          description: 'Tratamiento histórico de la filosofía',
+        },
+        { summary_2_id: 12, code: '111', description: 'Ontología' },
+        { summary_2_id: 12, code: '112', description: '-' },
+        {
+          summary_2_id: 12,
+          code: '113',
+          description: 'Cosmología (Filosofía de la naturaleza)',
+        },
+        { summary_2_id: 12, code: '114', description: 'Espacio' },
+        { summary_2_id: 12, code: '115', description: 'Tiempo' },
+        { summary_2_id: 12, code: '116', description: 'Cambio' },
+        { summary_2_id: 12, code: '117', description: 'Estructura' },
+        { summary_2_id: 12, code: '118', description: 'Fuerza & Energía' },
+        { summary_2_id: 12, code: '119', description: 'Números & cantidad' },
+        {
+          summary_2_id: 13,
+          code: '121',
+          description: 'Epistemología (Teoría del conocimiento)',
+        },
+        { summary_2_id: 13, code: '122', description: 'Causalidad' },
+        {
+          summary_2_id: 13,
+          code: '123',
+          description: 'Determinismo e indeterminismo',
+        },
+        { summary_2_id: 13, code: '124', description: 'Teleología' },
+        { summary_2_id: 13, code: '125', description: '-' },
+        { summary_2_id: 13, code: '126', description: 'El yo' },
+        {
+          summary_2_id: 13,
+          code: '127',
+          description: 'El inconsciente & el subconsciente',
+        },
+        { summary_2_id: 13, code: '128', description: 'Género humano' },
+        {
+          summary_2_id: 13,
+          code: '129',
+          description: 'Origen & destino del alma individual',
+        },
+        {
+          summary_2_id: 14,
+          code: '131',
+          description: 'Métodos ocultos para lograr bienestar',
+        },
+        { summary_2_id: 14, code: '132', description: '-' },
+        {
+          summary_2_id: 14,
+          code: '133',
+          description: 'Parapsicología & ocultismo',
+        },
+        { summary_2_id: 14, code: '134', description: '-' },
+        { summary_2_id: 14, code: '135', description: 'Sueños & misterios' },
+        { summary_2_id: 14, code: '136', description: '-' },
+        {
+          summary_2_id: 14,
+          code: '137',
+          description: 'Grafología adivinatoria',
+        },
+        { summary_2_id: 14, code: '138', description: 'Fisionomía' },
+        { summary_2_id: 14, code: '139', description: 'Frenología' },
+        {
+          summary_2_id: 15,
+          code: '141',
+          description: 'Idealismo & sistemas relacionados',
+        },
+        { summary_2_id: 15, code: '142', description: 'Filosofía crítica' },
+        {
+          summary_2_id: 15,
+          code: '143',
+          description: 'Intuicionalismo & bergsonismo',
+        },
+        {
+          summary_2_id: 15,
+          code: '144',
+          description: 'Humanismo & sistemas relacionados',
+        },
+        { summary_2_id: 15, code: '145', description: 'Sensacionalismo' },
+        {
+          summary_2_id: 15,
+          code: '146',
+          description: 'Naturalismo & sistemas relacionados',
+        },
+        {
+          summary_2_id: 15,
+          code: '147',
+          description: 'Panteísmo & sistemas relacionados',
+        },
+        {
+          summary_2_id: 15,
+          code: '148',
+          description: 'Liberalismo, eclecticismo, tradicionalismo',
+        },
+        {
+          summary_2_id: 15,
+          code: '149',
+          description: 'Otros sistemas filosóficos',
+        },
+        { summary_2_id: 16, code: '151', description: '-' },
+        {
+          summary_2_id: 16,
+          code: '152',
+          description: 'Percepción, movimiento, emociones, impulsos',
+        },
+        {
+          summary_2_id: 16,
+          code: '153',
+          description: 'Procesos mentales & inteligencia',
+        },
+        {
+          summary_2_id: 16,
+          code: '154',
+          description: 'Subconsciente & estados alterados',
+        },
+        {
+          summary_2_id: 16,
+          code: '155',
+          description: 'Psicología diferencial & del desarrollo',
+        },
+        { summary_2_id: 16, code: '156', description: 'Psicología comparada' },
+        { summary_2_id: 16, code: '157', description: '-' },
+        { summary_2_id: 16, code: '158', description: 'Psicología aplicada' },
+        { summary_2_id: 16, code: '159', description: '-' },
+        { summary_2_id: 17, code: '161', description: 'Inducción' },
+        { summary_2_id: 17, code: '162', description: 'Deducción' },
+        { summary_2_id: 17, code: '163', description: '-' },
+        { summary_2_id: 17, code: '164', description: '-' },
+        {
+          summary_2_id: 17,
+          code: '165',
+          description: 'Falacias & fuentes de error',
+        },
+        { summary_2_id: 17, code: '166', description: 'Silogismos' },
+        { summary_2_id: 17, code: '167', description: 'Hipótesis' },
+        {
+          summary_2_id: 17,
+          code: '168',
+          description: 'Argumento & persuasión',
+        },
+        { summary_2_id: 17, code: '169', description: 'Analogía' },
+        { summary_2_id: 18, code: '171', description: 'Sistemas & doctrinas' },
+        { summary_2_id: 18, code: '172', description: 'Ética política' },
+        {
+          summary_2_id: 18,
+          code: '173',
+          description: 'Ética de las relaciones familiares',
+        },
+        {
+          summary_2_id: 18,
+          code: '174',
+          description: 'Ética económica & profesional',
+        },
+        {
+          summary_2_id: 18,
+          code: '175',
+          description: 'Ética de la recreación & del tiempo libre',
+        },
+        {
+          summary_2_id: 18,
+          code: '176',
+          description: 'Ética sexual & de la reproducción',
+        },
+        {
+          summary_2_id: 18,
+          code: '177',
+          description: 'Ética de las relaciones sociales',
+        },
+        { summary_2_id: 18, code: '178', description: 'Ética del consumo' },
+        { summary_2_id: 18, code: '179', description: 'Otras normas éticas' },
+        { summary_2_id: 19, code: '181', description: 'Filosofía oriental' },
+        {
+          summary_2_id: 19,
+          code: '182',
+          description: 'Filosofías griegas, presocráticas',
+        },
+        {
+          summary_2_id: 19,
+          code: '183',
+          description: 'Filosofías sofista & socrática',
+        },
+        { summary_2_id: 19, code: '184', description: 'Filosofía platónica' },
+        {
+          summary_2_id: 19,
+          code: '185',
+          description: 'Filosofía aristotélica',
+        },
+        {
+          summary_2_id: 19,
+          code: '186',
+          description: 'Filosofía escéptica & neoplatónica',
+        },
+        { summary_2_id: 19, code: '187', description: 'Filosofía epicúrea' },
+        { summary_2_id: 19, code: '188', description: 'Filosofía estoica' },
+        {
+          summary_2_id: 19,
+          code: '189',
+          description: 'Filosofía medieval occidental',
+        },
+        {
+          summary_2_id: 20,
+          code: '191',
+          description: 'Estados Unidos & Canadá',
+        },
+        { summary_2_id: 20, code: '192', description: 'Islas Británicas' },
+        {
+          summary_2_id: 20,
+          code: '193',
+          description: 'Alemania & Austria',
+        },
+        {
+          summary_2_id: 20,
+          code: '194',
+          description: 'Francia',
+        },
+        {
+          summary_2_id: 20,
+          code: '195',
+          description: 'Italia',
+        },
+        {
+          summary_2_id: 20,
+          code: '196',
+          description: 'España & Portugal',
+        },
+        {
+          summary_2_id: 20,
+          code: '197',
+          description: 'Anterior Unión Soviética',
+        },
+        {
+          summary_2_id: 20,
+          code: '198',
+          description: 'Escandinavia',
+        },
+        {
+          summary_2_id: 20,
+          code: '199',
+          description: 'Otras áreas geográficas',
+        },
+      ],
+    );
+  },
+
+  async down(queryInterface, Sequelize) {},
+};
