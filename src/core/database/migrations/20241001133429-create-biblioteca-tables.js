@@ -254,39 +254,6 @@ module.exports = {
       },
     );
 
-    // *Create table books_categories
-    await queryInterface.createTable(
-      {
-        schema,
-        tableName: 'books_categories',
-      },
-      {
-        book_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'books',
-            },
-            key: 'id',
-          },
-        },
-        category_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'categories',
-            },
-            key: 'id',
-          },
-        },
-        ...timestamp,
-      },
-    );
-
     // *Create table co-authorship
     await queryInterface.createTable(
       {
