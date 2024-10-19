@@ -246,17 +246,42 @@ module.exports = {
         image_url: {
           type: Sequelize.STRING,
         },
-        available_copies: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
         published_at: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        price: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
+        ...timestamp,
+      },
+    );
+
+    // *Create table books_categories
+    await queryInterface.createTable(
+      {
+        schema,
+        tableName: 'books_categories',
+      },
+      {
+        book_id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          references: {
+            model: {
+              schema,
+              tableName: 'books',
+            },
+            key: 'id',
+          },
+        },
+        category_id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          references: {
+            model: {
+              schema,
+              tableName: 'categories',
+            },
+            key: 'id',
+          },
         },
         ...timestamp,
       },
@@ -298,16 +323,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     const schema = 'biblioteca';
-
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'co_authorship',
-    });
-
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'books',
-    });
 
     await queryInterface.dropTable({
       schema,
