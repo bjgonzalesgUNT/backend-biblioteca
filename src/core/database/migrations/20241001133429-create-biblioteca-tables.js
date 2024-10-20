@@ -37,16 +37,21 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
-        person_id: {
-          type: Sequelize.INTEGER,
+        surnames: {
+          type: Sequelize.STRING,
           allowNull: false,
-          references: {
-            model: {
-              schema: 'sistemas',
-              tableName: 'people',
-            },
-            key: 'id',
-          },
+        },
+        names: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        nationality: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        gender: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         alias: {
           type: Sequelize.STRING,
@@ -60,11 +65,11 @@ module.exports = {
       },
     );
 
-    // *Create table editorial
+    // *Create table publishers
     await queryInterface.createTable(
       {
         schema,
-        tableName: 'editorial',
+        tableName: 'publishers',
       },
       {
         id: {
@@ -217,13 +222,13 @@ module.exports = {
             key: 'id',
           },
         },
-        editorial_id: {
+        publisher_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
             model: {
               schema,
-              tableName: 'editorial',
+              tableName: 'publishers',
             },
             key: 'id',
           },
@@ -291,26 +296,52 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const schema = 'biblioteca';
 
+    // *Drop table co-authorship
     await queryInterface.dropTable({
       schema,
-      tableName: 'summary_3',
+      tableName: 'co_authorship',
     });
 
+    // *Drop table books
     await queryInterface.dropTable({
       schema,
-      tableName: 'summary_2',
+      tableName: 'books',
     });
 
+    // *Drop table summary_3
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_3',
+      },
+      { cascade: true },
+    );
+
+    // *Drop table summary_2
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_2',
+      },
+      { cascade: true },
+    );
+
+    // *Drop table summary_1
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_1',
+      },
+      { cascade: true },
+    );
+
+    // *Drop table publishers
     await queryInterface.dropTable({
       schema,
-      tableName: 'summary_1',
+      tableName: 'publishers',
     });
 
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'editorial',
-    });
-
+    // *Drop table authors
     await queryInterface.dropTable({
       schema,
       tableName: 'authors',

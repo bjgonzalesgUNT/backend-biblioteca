@@ -9,6 +9,11 @@ module.exports = {
         tableName: 'summary_3',
       },
       [
+        {
+          summary_2_id: 41,
+          code: '400',
+          description: 'Lengua',
+        },
         { summary_2_id: 41, code: '401', description: 'Filosofía y teoría' },
         { summary_2_id: 41, code: '402', description: 'Miscelánea' },
         {
@@ -42,6 +47,11 @@ module.exports = {
           code: '409',
           description: 'Tratamiento geográfico y de personas',
         },
+        {
+          summary_2_id: 42,
+          code: '410',
+          description: 'Lingüística',
+        },
         { summary_2_id: 42, code: '411', description: 'Sistemas de escritura' },
         { summary_2_id: 42, code: '412', description: 'Etimología' },
         { summary_2_id: 42, code: '413', description: 'Diccionarios' },
@@ -66,6 +76,11 @@ module.exports = {
           summary_2_id: 42,
           code: '419',
           description: 'Lenguajes verbales no hablados ni escritos',
+        },
+        {
+          summary_2_id: 43,
+          code: '420',
+          description: 'Ingles & inglés antiguo',
         },
         {
           summary_2_id: 43,
@@ -98,6 +113,11 @@ module.exports = {
         },
         {
           summary_2_id: 44,
+          code: '430',
+          description: 'Lenguas germánicas, Alemán',
+        },
+        {
+          summary_2_id: 44,
           code: '431',
           description: 'Sistemas de escritura y fonología alemana',
         },
@@ -120,6 +140,11 @@ module.exports = {
           summary_2_id: 44,
           code: '439',
           description: 'Otras lenguas germánicas',
+        },
+        {
+          summary_2_id: 45,
+          code: '440',
+          description: 'Lenguas romances, Francés',
         },
         {
           summary_2_id: 45,
@@ -148,6 +173,11 @@ module.exports = {
         { summary_2_id: 45, code: '449', description: 'Provenzal y catalán' },
         {
           summary_2_id: 46,
+          code: '450',
+          description: 'Italiano, rumano, retorromano',
+        },
+        {
+          summary_2_id: 46,
           code: '451',
           description: 'Sistema de escritura y fonología italianos',
         },
@@ -173,6 +203,11 @@ module.exports = {
         { summary_2_id: 46, code: '459', description: 'Rumano y retorromano' },
         {
           summary_2_id: 47,
+          code: '460',
+          description: 'Lenguas española & portuguesa',
+        },
+        {
+          summary_2_id: 47,
           code: '461',
           description: 'Sistema de escritura y fonología',
         },
@@ -196,6 +231,11 @@ module.exports = {
           description: 'Uso del español estándar',
         },
         { summary_2_id: 47, code: '469', description: 'Portugués' },
+        {
+          summary_2_id: 48,
+          code: '470',
+          description: 'Lenguas itálicas, Latín',
+        },
         {
           summary_2_id: 48,
           code: '471',
@@ -228,6 +268,11 @@ module.exports = {
           summary_2_id: 48,
           code: '479',
           description: 'Otras lenguas itálicas',
+        },
+        {
+          summary_2_id: 49,
+          code: '480',
+          description: 'Lenguas helénicas, Griego clásico',
         },
         {
           summary_2_id: 49,
@@ -265,6 +310,11 @@ module.exports = {
           summary_2_id: 49,
           code: '489',
           description: 'Otras lenguas helénicas',
+        },
+        {
+          summary_2_id: 50,
+          code: '490',
+          description: 'Otras lenguas',
         },
         {
           summary_2_id: 50,

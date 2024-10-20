@@ -11,6 +11,11 @@ module.exports = {
       [
         {
           summary_2_id: 11,
+          code: '100',
+          description: 'Filosofía & psicología',
+        },
+        {
+          summary_2_id: 11,
           code: '101',
           description: 'Teoría de la filosofía',
         },
@@ -50,6 +55,7 @@ module.exports = {
           code: '109',
           description: 'Tratamiento histórico de la filosofía',
         },
+        { summary_2_id: 12, code: '110', description: 'Metafísica' },
         { summary_2_id: 12, code: '111', description: 'Ontología' },
         { summary_2_id: 12, code: '112', description: '-' },
         {
@@ -63,6 +69,11 @@ module.exports = {
         { summary_2_id: 12, code: '117', description: 'Estructura' },
         { summary_2_id: 12, code: '118', description: 'Fuerza & Energía' },
         { summary_2_id: 12, code: '119', description: 'Números & cantidad' },
+        {
+          summary_2_id: 13,
+          code: '120',
+          description: 'Epistemología, causalidad, género',
+        },
         {
           summary_2_id: 13,
           code: '121',
@@ -90,6 +101,11 @@ module.exports = {
         },
         {
           summary_2_id: 14,
+          code: '130',
+          description: 'Fenómenos paranormales',
+        },
+        {
+          summary_2_id: 14,
           code: '131',
           description: 'Métodos ocultos para lograr bienestar',
         },
@@ -109,6 +125,11 @@ module.exports = {
         },
         { summary_2_id: 14, code: '138', description: 'Fisionomía' },
         { summary_2_id: 14, code: '139', description: 'Frenología' },
+        {
+          summary_2_id: 15,
+          code: '140',
+          description: 'Escuelas filosóficas específicas',
+        },
         {
           summary_2_id: 15,
           code: '141',
@@ -146,6 +167,11 @@ module.exports = {
           code: '149',
           description: 'Otros sistemas filosóficos',
         },
+        {
+          summary_2_id: 16,
+          code: '150',
+          description: 'Psicología',
+        },
         { summary_2_id: 16, code: '151', description: '-' },
         {
           summary_2_id: 16,
@@ -171,6 +197,11 @@ module.exports = {
         { summary_2_id: 16, code: '157', description: '-' },
         { summary_2_id: 16, code: '158', description: 'Psicología aplicada' },
         { summary_2_id: 16, code: '159', description: '-' },
+        {
+          summary_2_id: 17,
+          code: '160',
+          description: 'Lógica',
+        },
         { summary_2_id: 17, code: '161', description: 'Inducción' },
         { summary_2_id: 17, code: '162', description: 'Deducción' },
         { summary_2_id: 17, code: '163', description: '-' },
@@ -188,6 +219,11 @@ module.exports = {
           description: 'Argumento & persuasión',
         },
         { summary_2_id: 17, code: '169', description: 'Analogía' },
+        {
+          summary_2_id: 18,
+          code: '170',
+          description: 'Ética (Filosofía moral)',
+        },
         { summary_2_id: 18, code: '171', description: 'Sistemas & doctrinas' },
         { summary_2_id: 18, code: '172', description: 'Ética política' },
         {
@@ -217,6 +253,11 @@ module.exports = {
         },
         { summary_2_id: 18, code: '178', description: 'Ética del consumo' },
         { summary_2_id: 18, code: '179', description: 'Otras normas éticas' },
+        {
+          summary_2_id: 19,
+          code: '180',
+          description: 'Filosofía antigua, medieval, oriental',
+        },
         { summary_2_id: 19, code: '181', description: 'Filosofía oriental' },
         {
           summary_2_id: 19,
@@ -245,6 +286,11 @@ module.exports = {
           summary_2_id: 19,
           code: '189',
           description: 'Filosofía medieval occidental',
+        },
+        {
+          summary_2_id: 20,
+          code: '190',
+          description: 'Filosofía moderna occidental',
         },
         {
           summary_2_id: 20,

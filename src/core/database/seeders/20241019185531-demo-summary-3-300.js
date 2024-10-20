@@ -11,6 +11,11 @@ module.exports = {
       [
         {
           summary_2_id: 31,
+          code: '300',
+          description: 'Ciencias sociales',
+        },
+        {
+          summary_2_id: 31,
           code: '301',
           description: 'Sociología y antropología',
         },
@@ -30,6 +35,7 @@ module.exports = {
         { summary_2_id: 31, code: '307', description: 'Comunidades' },
         { summary_2_id: 31, code: '308', description: '(No especificado)' },
         { summary_2_id: 31, code: '309', description: '(No especificado)' },
+        { summary_2_id: 32, code: '310', description: 'Estadística general' },
         { summary_2_id: 32, code: '311', description: '(No especificado)' },
         { summary_2_id: 32, code: '312', description: '(No especificado)' },
         { summary_2_id: 32, code: '313', description: '(No especificado)' },
@@ -42,6 +48,11 @@ module.exports = {
           summary_2_id: 32,
           code: '319',
           description: 'De otras partes del mundo',
+        },
+        {
+          summary_2_id: 33,
+          code: '320',
+          description: 'Ciencia política',
         },
         {
           summary_2_id: 33,
@@ -80,6 +91,11 @@ module.exports = {
           description: 'El proceso legislativo',
         },
         { summary_2_id: 33, code: '329', description: '(No especificado)' },
+        {
+          summary_2_id: 34,
+          code: '330',
+          description: 'Economía',
+        },
         { summary_2_id: 34, code: '331', description: 'Economía laboral' },
         { summary_2_id: 34, code: '332', description: 'Economía financiera' },
         { summary_2_id: 34, code: '333', description: 'Economía de la tierra' },
@@ -100,6 +116,11 @@ module.exports = {
           summary_2_id: 34,
           code: '339',
           description: 'Macroeconomía y temas relacionados',
+        },
+        {
+          summary_2_id: 35,
+          code: '340',
+          description: 'Derecho',
         },
         { summary_2_id: 35, code: '341', description: 'Derecho internacional' },
         {
@@ -134,6 +155,11 @@ module.exports = {
           summary_2_id: 35,
           code: '349',
           description: 'Derecho de jurisprudencia y áreas específicas',
+        },
+        {
+          summary_2_id: 36,
+          code: '350',
+          description: 'Administración pública',
         },
         {
           summary_2_id: 36,
@@ -174,6 +200,11 @@ module.exports = {
         },
         {
           summary_2_id: 37,
+          code: '360',
+          description: 'Servicios sociales; asociaciones',
+        },
+        {
+          summary_2_id: 37,
           code: '361',
           description: 'Problemas sociales y bienestar social en general',
         },
@@ -207,6 +238,11 @@ module.exports = {
         },
         {
           summary_2_id: 38,
+          code: '370',
+          description: 'Educación',
+        },
+        {
+          summary_2_id: 38,
           code: '371',
           description: 'Administración escolar; educación especial',
         },
@@ -225,6 +261,11 @@ module.exports = {
           summary_2_id: 38,
           code: '379',
           description: 'Reglamentación, control, apoyo gubernamentales',
+        },
+        {
+          summary_2_id: 39,
+          code: '380',
+          description: 'Comercio, comunicaciones, transporte',
         },
         {
           summary_2_id: 39,
@@ -271,6 +312,11 @@ module.exports = {
           summary_2_id: 39,
           code: '389',
           description: 'Metrología y normalización',
+        },
+        {
+          summary_2_id: 40,
+          code: '390',
+          description: 'Costumbres, etiqueta, folclor',
         },
         {
           summary_2_id: 40,

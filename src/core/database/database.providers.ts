@@ -5,6 +5,7 @@ import { User } from '@/modules/users/entities/user.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
 import { databaseConfig } from './config/database.config';
+import { Book } from '@/modules/books/entities';
 
 export const databaseProviders = [
   {
@@ -29,7 +30,15 @@ export const databaseProviders = [
         define: { freezeTableName: true },
       });
 
-      sequelize.addModels([User, Role, Person, Summary1, Summary2, Summary3]);
+      sequelize.addModels([
+        User,
+        Role,
+        Person,
+        Summary1,
+        Summary2,
+        Summary3,
+        Book,
+      ]);
 
       return sequelize;
     },

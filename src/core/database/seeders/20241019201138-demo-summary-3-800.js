@@ -9,6 +9,11 @@ module.exports = {
         tableName: 'summary_3',
       },
       [
+        {
+          summary_2_id: 81,
+          code: '800',
+          description: 'Literatura & retóricas',
+        },
         { summary_2_id: 81, code: '801', description: 'Filosofía y retórica' },
         { summary_2_id: 81, code: '802', description: 'Miscelánea' },
         {
@@ -38,6 +43,11 @@ module.exports = {
           code: '809',
           description: 'Historia y crítica literaria',
         },
+        {
+          summary_2_id: 82,
+          code: '810',
+          description: 'Literatura americana en inglés',
+        },
         { summary_2_id: 82, code: '811', description: 'Poesía' },
         { summary_2_id: 82, code: '812', description: 'Teatro' },
         { summary_2_id: 82, code: '813', description: 'Novela' },
@@ -47,6 +57,11 @@ module.exports = {
         { summary_2_id: 82, code: '817', description: 'Sátira y humor' },
         { summary_2_id: 82, code: '818', description: 'Escritos varios' },
         { summary_2_id: 82, code: '819', description: '(No especificado)' },
+        {
+          summary_2_id: 83,
+          code: '820',
+          description: 'Literatura inglesa & inglesa antigua',
+        },
         { summary_2_id: 83, code: '821', description: 'Poesía inglesa' },
         { summary_2_id: 83, code: '822', description: 'Teatro inglés' },
         { summary_2_id: 83, code: '823', description: 'Novela inglesa' },
@@ -63,6 +78,11 @@ module.exports = {
           summary_2_id: 83,
           code: '829',
           description: 'Literatura inglesa antigua (anglosajona)',
+        },
+        {
+          summary_2_id: 84,
+          code: '830',
+          description: 'Literatura de lenguas germánicas',
         },
         { summary_2_id: 84, code: '831', description: 'Poesía alemana' },
         { summary_2_id: 84, code: '832', description: 'Teatro alemán' },
@@ -81,6 +101,11 @@ module.exports = {
           code: '839',
           description: 'Otras literaturas germánicas',
         },
+        {
+          summary_2_id: 85,
+          code: '840',
+          description: 'Literaturas de Lenguas Romances',
+        },
         { summary_2_id: 85, code: '841', description: 'Poesía francesa' },
         { summary_2_id: 85, code: '842', description: 'Teatro francés' },
         { summary_2_id: 85, code: '843', description: 'Novela francesa' },
@@ -98,6 +123,11 @@ module.exports = {
           description: 'Escritos varios franceses',
         },
         { summary_2_id: 85, code: '849', description: 'Provenzal y catalán' },
+        {
+          summary_2_id: 86,
+          code: '850',
+          description: 'Literaturas italiana, rumana, retorromana',
+        },
         { summary_2_id: 86, code: '851', description: 'Poesía italiana' },
         { summary_2_id: 86, code: '852', description: 'Teatro italiano' },
         { summary_2_id: 86, code: '853', description: 'Novela italiana' },
@@ -115,6 +145,11 @@ module.exports = {
           description: 'Escritos varios italianos',
         },
         { summary_2_id: 86, code: '859', description: 'Romano y retorromano' },
+        {
+          summary_2_id: 87,
+          code: '860',
+          description: 'Literatura española y portuguesa',
+        },
         { summary_2_id: 87, code: '861', description: 'Poesía española' },
         { summary_2_id: 87, code: '862', description: 'Teatro español' },
         { summary_2_id: 87, code: '863', description: 'Novela española' },
@@ -132,6 +167,11 @@ module.exports = {
           description: 'Escritos varios españoles',
         },
         { summary_2_id: 87, code: '869', description: 'Literatura portuguesa' },
+        {
+          summary_2_id: 88,
+          code: '870',
+          description: 'Literaturas itálicas , Literatura italiana',
+        },
         { summary_2_id: 88, code: '871', description: 'Poesía latina' },
         {
           summary_2_id: 88,
@@ -160,6 +200,11 @@ module.exports = {
           summary_2_id: 88,
           code: '879',
           description: 'Literaturas de otras lenguas itálicas',
+        },
+        {
+          summary_2_id: 89,
+          code: '880',
+          description: 'Literaturas helénica, Griega clásica',
         },
         { summary_2_id: 89, code: '881', description: 'Poesía griega clásica' },
         { summary_2_id: 89, code: '882', description: 'Teatro griego clásico' },
@@ -197,6 +242,11 @@ module.exports = {
           summary_2_id: 89,
           code: '889',
           description: 'Literatura griega moderna',
+        },
+        {
+          summary_2_id: 90,
+          code: '890',
+          description: 'Literaturas de otras lenguas',
         },
         {
           summary_2_id: 90,

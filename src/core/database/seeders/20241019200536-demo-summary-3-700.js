@@ -9,6 +9,7 @@ module.exports = {
         tableName: 'summary_3',
       },
       [
+        { summary_2_id: 71, code: '700', description: 'Las artes' },
         { summary_2_id: 71, code: '701', description: 'Filosofía y teoría' },
         { summary_2_id: 71, code: '702', description: 'Miscelánea' },
         {
@@ -44,6 +45,11 @@ module.exports = {
         },
         {
           summary_2_id: 72,
+          code: '710',
+          description: 'Urbanismo & arte del paisaje',
+        },
+        {
+          summary_2_id: 72,
           code: '711',
           description: 'Planificación del espacio (Urbanismo)',
         },
@@ -67,6 +73,11 @@ module.exports = {
           description: 'Diseño de paisaje de cementerios',
         },
         { summary_2_id: 72, code: '719', description: 'Paisajes naturales' },
+        {
+          summary_2_id: 73,
+          code: '720',
+          description: 'Arquitectura',
+        },
         {
           summary_2_id: 73,
           code: '721',
@@ -106,6 +117,11 @@ module.exports = {
         { summary_2_id: 73, code: '729', description: 'Diseño y decoración' },
         {
           summary_2_id: 74,
+          code: '730',
+          description: 'Artes plásticas; escultura',
+        },
+        {
+          summary_2_id: 74,
           code: '731',
           description: 'Procesos, formas, temas de la escultura',
         },
@@ -133,6 +149,11 @@ module.exports = {
         },
         { summary_2_id: 74, code: '738', description: 'Artes cerámicas' },
         { summary_2_id: 74, code: '739', description: 'Arte en metal' },
+        {
+          summary_2_id: 75,
+          code: '740',
+          description: 'Dibujo y artes decorativas',
+        },
         { summary_2_id: 75, code: '741', description: 'Dibujo y dibujos' },
         { summary_2_id: 75, code: '742', description: 'Perspectiva' },
         {
@@ -150,6 +171,11 @@ module.exports = {
         },
         { summary_2_id: 75, code: '748', description: 'Vidrio' },
         { summary_2_id: 75, code: '749', description: 'Muebles y accesorios' },
+        {
+          summary_2_id: 76,
+          code: '750',
+          description: 'Pintura y pinturas',
+        },
         {
           summary_2_id: 76,
           code: '751',
@@ -178,6 +204,11 @@ module.exports = {
           summary_2_id: 76,
           code: '759',
           description: 'Tratamiento histórico, geográfico, de personas',
+        },
+        {
+          summary_2_id: 77,
+          code: '760',
+          description: 'Artes gráficas, Arte de grabar & grabados',
         },
         {
           summary_2_id: 77,
@@ -210,6 +241,11 @@ module.exports = {
         { summary_2_id: 77, code: '769', description: 'Grabados' },
         {
           summary_2_id: 78,
+          code: '770',
+          description: 'Fotografía & fotografías',
+        },
+        {
+          summary_2_id: 78,
           code: '771',
           description: 'Técnicas, equipo, materiales',
         },
@@ -233,6 +269,11 @@ module.exports = {
           description: 'Campos y clases de fotografía',
         },
         { summary_2_id: 78, code: '779', description: 'Fotografía' },
+        {
+          summary_2_id: 79,
+          code: '780',
+          description: 'Música',
+        },
         {
           summary_2_id: 79,
           code: '781',
@@ -270,6 +311,11 @@ module.exports = {
           description: 'Instrumentos de viento (Aerófonos)',
         },
         { summary_2_id: 79, code: '789', description: '(No especificado)' },
+        {
+          summary_2_id: 80,
+          code: '790',
+          description: 'Artes recreativas & de la actuación',
+        },
         {
           summary_2_id: 80,
           code: '791',

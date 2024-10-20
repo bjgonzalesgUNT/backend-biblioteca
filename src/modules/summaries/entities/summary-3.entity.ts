@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -45,4 +46,7 @@ export class Summary3 extends Model<Summary3> {
     allowNull: false,
   })
   description: string;
+
+  @BelongsTo(() => Summary2)
+  summary2: Summary2;
 }

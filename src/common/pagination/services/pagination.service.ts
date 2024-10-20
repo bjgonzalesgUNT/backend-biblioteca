@@ -45,7 +45,7 @@ export class PaginationService {
               page + 1
             }&limit=${limit}${extraParamsString}`
           : null,
-      rows: data,
+      rows: data.length > 0 ? data : [],
     };
   }
 }

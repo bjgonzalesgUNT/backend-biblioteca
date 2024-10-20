@@ -11,6 +11,11 @@ module.exports = {
       [
         {
           summary_2_id: 91,
+          code: '900',
+          description: 'Geografía e historia',
+        },
+        {
+          summary_2_id: 91,
           code: '901',
           description: 'Filosofía y teoría de la historia',
         },
@@ -46,6 +51,11 @@ module.exports = {
           description: 'En relación con clases de personas',
         },
         { summary_2_id: 91, code: '909', description: 'Historia universal' },
+        {
+          summary_2_id: 92,
+          code: '910',
+          description: 'Geografía & viajes',
+        },
         { summary_2_id: 92, code: '911', description: 'Geografía histórica' },
         {
           summary_2_id: 92,
@@ -59,6 +69,11 @@ module.exports = {
         { summary_2_id: 92, code: '917', description: 'América del Norte' },
         { summary_2_id: 92, code: '918', description: 'América del Sur' },
         { summary_2_id: 92, code: '919', description: 'Otras áreas' },
+        {
+          summary_2_id: 93,
+          code: '920',
+          description: 'Biografía, genealogía, emblemas',
+        },
         { summary_2_id: 93, code: '921', description: '(No especificado)' },
         { summary_2_id: 93, code: '922', description: '(No especificado)' },
         { summary_2_id: 93, code: '923', description: '(No especificado)' },
@@ -71,6 +86,11 @@ module.exports = {
           summary_2_id: 93,
           code: '929',
           description: 'Genealogía, nombres, emblemas',
+        },
+        {
+          summary_2_id: 94,
+          code: '930',
+          description: 'Historia del mundo antiguo',
         },
         { summary_2_id: 94, code: '931', description: 'China' },
         { summary_2_id: 94, code: '932', description: 'Egipto' },
@@ -96,6 +116,11 @@ module.exports = {
           summary_2_id: 94,
           code: '939',
           description: 'Otras partes del mundo antiguo',
+        },
+        {
+          summary_2_id: 95,
+          code: '940',
+          description: 'Historia general de Europa',
         },
         { summary_2_id: 95, code: '941', description: 'Islas Británicas' },
         { summary_2_id: 95, code: '942', description: 'Inglaterra y Gales' },
@@ -132,6 +157,11 @@ module.exports = {
         },
         {
           summary_2_id: 96,
+          code: '950',
+          description: 'Historia general de Asia, Extremo Oriente',
+        },
+        {
+          summary_2_id: 96,
           code: '951',
           description: 'China y áreas adyacentes',
         },
@@ -155,6 +185,11 @@ module.exports = {
         },
         { summary_2_id: 96, code: '958', description: 'Asia central' },
         { summary_2_id: 96, code: '959', description: 'Asia sudoriental' },
+        {
+          summary_2_id: 97,
+          code: '960',
+          description: 'Historia general de África',
+        },
         { summary_2_id: 97, code: '961', description: 'Túnez y Libia' },
         { summary_2_id: 97, code: '962', description: 'Egipto y Sudán' },
         { summary_2_id: 97, code: '963', description: 'Etiopía' },
@@ -179,6 +214,11 @@ module.exports = {
           summary_2_id: 97,
           code: '969',
           description: 'Islas del Océano Índico del Sur',
+        },
+        {
+          summary_2_id: 98,
+          code: '970',
+          description: 'Historia general de América del Norte',
         },
         { summary_2_id: 98, code: '971', description: 'Canadá' },
         { summary_2_id: 98, code: '972', description: 'Mesoamérica, México' },
@@ -213,6 +253,11 @@ module.exports = {
           code: '979',
           description: 'Gran Cuenca y Vertiente del Pacífico',
         },
+        {
+          summary_2_id: 99,
+          code: '980',
+          description: 'Historia general de América del Sur',
+        },
         { summary_2_id: 99, code: '981', description: 'Brasil' },
         { summary_2_id: 99, code: '982', description: 'Argentina' },
         { summary_2_id: 99, code: '983', description: 'Chile' },
@@ -222,6 +267,11 @@ module.exports = {
         { summary_2_id: 99, code: '987', description: 'Venezuela' },
         { summary_2_id: 99, code: '988', description: 'Guayanas' },
         { summary_2_id: 99, code: '989', description: 'Paraguay y Uruguay' },
+        {
+          summary_2_id: 100,
+          code: '990',
+          description: 'Historia general de otras áreas',
+        },
         { summary_2_id: 100, code: '991', description: '(No especificado)' },
         { summary_2_id: 100, code: '992', description: '(No especificado)' },
         { summary_2_id: 100, code: '993', description: 'Nueva Zelanda' },
