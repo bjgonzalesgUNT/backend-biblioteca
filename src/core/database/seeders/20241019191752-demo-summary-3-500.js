@@ -9,6 +9,11 @@ module.exports = {
         tableName: 'summary_3',
       },
       [
+        {
+          summary_2_id: 51,
+          code: '500',
+          description: 'Ciencias probabili & matemáticas',
+        },
         { summary_2_id: 51, code: '501', description: 'Filosofía y teoría' },
         { summary_2_id: 51, code: '502', description: 'Miscelánea' },
         {
@@ -38,6 +43,11 @@ module.exports = {
           code: '509',
           description: 'Tratamiento histórico, geográfico, de personas',
         },
+        {
+          summary_2_id: 52,
+          code: '510',
+          description: 'Matemáticas',
+        },
         { summary_2_id: 52, code: '511', description: 'Principios generales' },
         {
           summary_2_id: 52,
@@ -54,6 +64,11 @@ module.exports = {
           summary_2_id: 52,
           code: '519',
           description: 'Probabilidades y matemáticas aplicadas',
+        },
+        {
+          summary_2_id: 53,
+          code: '520',
+          description: 'Astronomía y ciencias afines',
         },
         { summary_2_id: 53, code: '521', description: 'Mecánica celeste' },
         {
@@ -80,6 +95,11 @@ module.exports = {
         },
         { summary_2_id: 53, code: '528', description: 'Efemérides' },
         { summary_2_id: 53, code: '529', description: 'Cronología' },
+        {
+          summary_2_id: 54,
+          code: '530',
+          description: 'Física',
+        },
         {
           summary_2_id: 54,
           code: '531',
@@ -111,6 +131,11 @@ module.exports = {
         { summary_2_id: 54, code: '539', description: 'Física moderna' },
         {
           summary_2_id: 55,
+          code: '540',
+          description: 'Química y ciencias afines',
+        },
+        {
+          summary_2_id: 55,
           code: '541',
           description: 'Química física y teórica',
         },
@@ -128,6 +153,11 @@ module.exports = {
         { summary_2_id: 55, code: '549', description: 'Mineralogía' },
         {
           summary_2_id: 56,
+          code: '550',
+          description: 'Ciencias de la tierra',
+        },
+        {
+          summary_2_id: 56,
           code: '551',
           description: 'Geología, hidrología, meteorología',
         },
@@ -143,6 +173,11 @@ module.exports = {
         { summary_2_id: 56, code: '557', description: 'De América del Norte' },
         { summary_2_id: 56, code: '558', description: 'De América del Sur' },
         { summary_2_id: 56, code: '559', description: 'De otras áreas' },
+        {
+          summary_2_id: 57,
+          code: '560',
+          description: 'Paleontología, paleozoología',
+        },
         { summary_2_id: 57, code: '561', description: 'Paleobotánica' },
         { summary_2_id: 57, code: '562', description: 'Invertebrados fósiles' },
         {
@@ -176,6 +211,11 @@ module.exports = {
           description: 'Aves fósiles (Pájaros fósiles)',
         },
         { summary_2_id: 57, code: '569', description: 'Mamíferos fósiles' },
+        {
+          summary_2_id: 58,
+          code: '570',
+          description: 'Ciencias de la vida',
+        },
         { summary_2_id: 58, code: '571', description: '(No especificado)' },
         { summary_2_id: 58, code: '572', description: 'Razas humanas' },
         { summary_2_id: 58, code: '573', description: 'Antropología física' },
@@ -197,6 +237,7 @@ module.exports = {
           code: '579',
           description: 'Colección y preservación',
         },
+        { summary_2_id: 59, code: '580', description: 'Ciencias botánicas' },
         { summary_2_id: 59, code: '581', description: 'Botánica' },
         {
           summary_2_id: 59,
@@ -226,7 +267,13 @@ module.exports = {
           code: '589',
           description: 'Talabiontas y procariotas',
         },
+        {
+          summary_2_id: 60,
+          code: '590',
+          description: 'Ciencias zoológicas',
+        },
         { summary_2_id: 60, code: '591', description: 'Zoología' },
+
         { summary_2_id: 60, code: '592', description: 'Invertebrados' },
         {
           summary_2_id: 60,

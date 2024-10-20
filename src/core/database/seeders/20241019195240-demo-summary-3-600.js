@@ -6,6 +6,11 @@ module.exports = {
     await queryInterface.bulkInsert(
       { schema: 'biblioteca', tableName: 'summary_3' },
       [
+        {
+          summary_2_id: 61,
+          code: '600',
+          description: 'Tecnología (Ciencias aplicadas)',
+        },
         { summary_2_id: 61, code: '601', description: 'Filosofía y teoría' },
         { summary_2_id: 61, code: '602', description: 'Miscelánea' },
         {
@@ -30,6 +35,11 @@ module.exports = {
           summary_2_id: 61,
           code: '609',
           description: 'Tratamiento histórico, geográfico, de personas',
+        },
+        {
+          summary_2_id: 62,
+          code: '610',
+          description: 'Ciencias médicas, Medicina',
         },
         {
           summary_2_id: 62,
@@ -60,6 +70,11 @@ module.exports = {
           description: 'Ginecología y otras especialidades médicas',
         },
         { summary_2_id: 62, code: '619', description: 'Medicina experimental' },
+        {
+          summary_2_id: 63,
+          code: '620',
+          description: 'Ingeniería y operaciones afines',
+        },
         { summary_2_id: 63, code: '621', description: 'Física aplicada' },
         {
           summary_2_id: 63,
@@ -88,6 +103,11 @@ module.exports = {
           summary_2_id: 63,
           code: '629',
           description: 'Otras ramas de la ingeniería',
+        },
+        {
+          summary_2_id: 64,
+          code: '630',
+          description: 'Agricultura',
         },
         {
           summary_2_id: 64,
@@ -130,6 +150,11 @@ module.exports = {
           code: '639',
           description: 'Caza, pesca, conservación',
         },
+        {
+          summary_2_id: 65,
+          code: '640',
+          description: 'Economía doméstica y vida familiar',
+        },
         { summary_2_id: 65, code: '641', description: 'Alimentos y bebidas' },
         {
           summary_2_id: 65,
@@ -159,6 +184,11 @@ module.exports = {
           code: '649',
           description: 'Puericultura y atención domiciliaria del enfermo',
         },
+        {
+          summary_2_id: 66,
+          code: '650',
+          description: 'Administración & servicios auxiliares',
+        },
         { summary_2_id: 66, code: '651', description: 'Servicios de oficina' },
         {
           summary_2_id: 66,
@@ -179,6 +209,11 @@ module.exports = {
           summary_2_id: 66,
           code: '659',
           description: 'Publicidad y relaciones públicas',
+        },
+        {
+          summary_2_id: 67,
+          code: '660',
+          description: 'Ingeniería Química',
         },
         {
           summary_2_id: 67,
@@ -222,6 +257,11 @@ module.exports = {
         },
         { summary_2_id: 67, code: '669', description: 'Metalurgia' },
         {
+          summary_2_id: 67,
+          code: '670',
+          description: 'Manufactura',
+        },
+        {
           summary_2_id: 68,
           code: '671',
           description: 'Metalistería y productos metálicos',
@@ -261,6 +301,11 @@ module.exports = {
         },
         {
           summary_2_id: 69,
+          code: '680',
+          description: 'Manufactura para usos específicos',
+        },
+        {
+          summary_2_id: 69,
           code: '681',
           description: 'Instrumentos de precisión y otros dispositivos',
         },
@@ -296,6 +341,11 @@ module.exports = {
           description: 'Otros productos acabados, empaques',
         },
         { summary_2_id: 69, code: '689', description: '(No especificado)' },
+        {
+          summary_2_id: 70,
+          code: '690',
+          description: 'Construcción',
+        },
         {
           summary_2_id: 70,
           code: '691',

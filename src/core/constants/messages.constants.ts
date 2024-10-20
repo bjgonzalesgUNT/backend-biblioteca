@@ -10,3 +10,6 @@ export const CREDENTIALS_INVALID_MESSAGE = 'Credenciales inválidas';
 
 export const DOCUMENT_ALREADY_EXISTS_MESSAGE =
   'El número de documento ya ha sido registrado';
+
+export const BOOK_NOT_FOUND_MESSAGE = 'Libro no encontrado';
+export const BOOK_ALREADY_EXISTS_MESSAGE = 'El libro ya existe';

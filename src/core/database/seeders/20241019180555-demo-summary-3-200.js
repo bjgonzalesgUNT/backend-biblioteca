@@ -11,6 +11,11 @@ module.exports = {
       [
         {
           summary_2_id: 21,
+          code: '200',
+          description: 'Religión',
+        },
+        {
+          summary_2_id: 21,
           code: '201',
           description: 'Filosofía del cristianismo',
         },
@@ -50,6 +55,11 @@ module.exports = {
           code: '209',
           description: 'Historia y geografía del cristianismo',
         },
+        {
+          summary_2_id: 22,
+          code: '210',
+          description: 'Teología natural',
+        },
         { summary_2_id: 22, code: '211', description: 'Conceptos de Dios' },
         {
           summary_2_id: 22,
@@ -63,6 +73,11 @@ module.exports = {
         { summary_2_id: 22, code: '217', description: '(No especificado)' },
         { summary_2_id: 22, code: '218', description: 'El Hombre' },
         { summary_2_id: 22, code: '219', description: '(No especificado)' },
+        {
+          summary_2_id: 23,
+          code: '220',
+          description: 'La Biblia',
+        },
         { summary_2_id: 23, code: '221', description: 'Antiguo Testamento' },
         {
           summary_2_id: 23,
@@ -96,6 +111,11 @@ module.exports = {
           code: '229',
           description: 'Apócrifos y seudoepígrafes',
         },
+        {
+          summary_2_id: 24,
+          code: '230',
+          description: 'Teología cristiana',
+        },
         { summary_2_id: 24, code: '231', description: 'Dios' },
         {
           summary_2_id: 24,
@@ -116,6 +136,11 @@ module.exports = {
           summary_2_id: 24,
           code: '239',
           description: 'Apologética y polémica',
+        },
+        {
+          summary_2_id: 25,
+          code: '240',
+          description: 'Moral cristiana & teología piadosa',
         },
         { summary_2_id: 25, code: '241', description: 'Teología moral' },
         { summary_2_id: 25, code: '242', description: 'Literatura piadosa' },
@@ -148,6 +173,11 @@ module.exports = {
         },
         {
           summary_2_id: 26,
+          code: '250',
+          description: 'Ordenes cristianas & iglesia local',
+        },
+        {
+          summary_2_id: 26,
           code: '251',
           description: 'Predicación (Homilética)',
         },
@@ -175,6 +205,11 @@ module.exports = {
           code: '259',
           description: 'Actividades de la iglesia local',
         },
+        {
+          summary_2_id: 27,
+          code: '260',
+          description: 'Teología social cristiana',
+        },
         { summary_2_id: 27, code: '261', description: 'Teología social' },
         { summary_2_id: 27, code: '262', description: 'Eclesiología' },
         {
@@ -196,6 +231,11 @@ module.exports = {
         },
         { summary_2_id: 27, code: '268', description: 'Educación religiosa' },
         { summary_2_id: 27, code: '269', description: 'Renovación espiritual' },
+        {
+          summary_2_id: 28,
+          code: '270',
+          description: 'Historia de la iglesia cristiana',
+        },
         {
           summary_2_id: 28,
           code: '271',
@@ -243,6 +283,11 @@ module.exports = {
         },
         {
           summary_2_id: 29,
+          code: '280',
+          description: 'Denominaciones y sectas cristianas',
+        },
+        {
+          summary_2_id: 29,
           code: '281',
           description: 'Iglesia primitiva y iglesia oriental',
         },
@@ -278,6 +323,11 @@ module.exports = {
           summary_2_id: 29,
           code: '289',
           description: 'Otras denominaciones y sectas',
+        },
+        {
+          summary_2_id: 30,
+          code: '290',
+          description: 'Otras & religión comparada',
         },
         { summary_2_id: 30, code: '291', description: 'Religión comparada' },
         {

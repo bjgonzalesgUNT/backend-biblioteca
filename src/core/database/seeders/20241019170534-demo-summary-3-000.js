@@ -9,6 +9,7 @@ module.exports = {
         tableName: 'summary_3',
       },
       [
+        { summary_2_id: 1, code: '000', description: 'Generalidades' },
         { summary_2_id: 1, code: '001', description: 'Conocimiento' },
         { summary_2_id: 1, code: '002', description: 'El libro' },
         { summary_2_id: 1, code: '003', description: 'Sistemas' },
@@ -30,6 +31,7 @@ module.exports = {
         { summary_2_id: 1, code: '007', description: '-' },
         { summary_2_id: 1, code: '008', description: '-' },
         { summary_2_id: 1, code: '009', description: '-' },
+        { summary_2_id: 2, code: '010', description: 'Bibliografía' },
         { summary_2_id: 2, code: '011', description: 'Bibliografías' },
         { summary_2_id: 2, code: '012', description: 'De individuos' },
         {
@@ -65,6 +67,11 @@ module.exports = {
         { summary_2_id: 2, code: '019', description: 'Catálogos diccionario' },
         {
           summary_2_id: 3,
+          code: '020',
+          description: 'Bibliotecología & ciencias de la información',
+        },
+        {
+          summary_2_id: 3,
           code: '021',
           description: 'Relaciones bibliotecarias',
         },
@@ -96,6 +103,11 @@ module.exports = {
           description: 'Lectura, uso de otros medios de información',
         },
         { summary_2_id: 3, code: '029', description: '-' },
+        {
+          summary_2_id: 4,
+          code: '030',
+          description: 'Obras enciclopédicas generales',
+        },
         { summary_2_id: 4, code: '031', description: 'Norteamericanas' },
         { summary_2_id: 4, code: '032', description: 'En inglés' },
         {
@@ -121,6 +133,11 @@ module.exports = {
           description: 'En lenguas escandinavas',
         },
         { summary_2_id: 4, code: '039', description: 'En otras lenguas' },
+        {
+          summary_2_id: 5,
+          code: '050',
+          description: 'Publicaciones en serie generales',
+        },
         { summary_2_id: 6, code: '051', description: 'Norteamericanas' },
         { summary_2_id: 6, code: '052', description: 'En inglés' },
         {
@@ -146,6 +163,11 @@ module.exports = {
           description: 'En lenguas escandinavas',
         },
         { summary_2_id: 6, code: '059', description: 'En otras lenguas' },
+        {
+          summary_2_id: 7,
+          code: '060',
+          description: 'Clasificaciones generales & museología',
+        },
         { summary_2_id: 7, code: '061', description: 'En América del Norte' },
         {
           summary_2_id: 7,
@@ -178,6 +200,11 @@ module.exports = {
           summary_2_id: 7,
           code: '069',
           description: 'Museología (Ciencia de los museos)',
+        },
+        {
+          summary_2_id: 8,
+          code: '070',
+          description: 'Medios noticiosos, periodismo, publicación',
         },
         { summary_2_id: 8, code: '071', description: 'En América del Norte' },
         {
@@ -212,6 +239,7 @@ module.exports = {
           code: '079',
           description: 'En otras áreas geográficas',
         },
+        { summary_2_id: 9, code: '080', description: 'Colecciones generales' },
         { summary_2_id: 9, code: '081', description: 'Norteamericanas' },
         { summary_2_id: 9, code: '082', description: 'En inglés' },
         {
@@ -237,6 +265,11 @@ module.exports = {
           description: 'En lenguas escandinavas',
         },
         { summary_2_id: 9, code: '089', description: 'En otras lenguas' },
+        {
+          summary_2_id: 10,
+          code: '090',
+          description: 'Manuscritos & libros raros',
+        },
         { summary_2_id: 10, code: '091', description: 'Manuscritos' },
         { summary_2_id: 10, code: '092', description: 'Libros xilográficos' },
         { summary_2_id: 10, code: '093', description: 'Incunables' },
