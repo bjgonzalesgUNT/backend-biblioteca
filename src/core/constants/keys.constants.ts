@@ -16,5 +16,7 @@ export const SUMMARY_3_REPOSITORY = 'SUMMARY_3_REPOSITORY';
 
 export const BOOK_REPOSITORY = 'BOOK_REPOSITORY';
 
+export const AUTHOR_REPOSITORY = 'AUTHOR_REPOSITORY';
+
 export const BEARER_KEY = 'Bearer';
 export const ROLES_KEY = 'ROLES';
