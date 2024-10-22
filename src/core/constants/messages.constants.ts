@@ -13,3 +13,6 @@ export const DOCUMENT_ALREADY_EXISTS_MESSAGE =
 
 export const BOOK_NOT_FOUND_MESSAGE = 'Libro no encontrado';
 export const BOOK_ALREADY_EXISTS_MESSAGE = 'El libro ya existe';
+
+export const AUTHOR_NOT_FOUND_MESSAGE = 'Autor no encontrado';
+export const AUTHOR_ALREADY_EXISTS_MESSAGE = 'El autor ya existe';
