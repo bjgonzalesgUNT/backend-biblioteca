@@ -1,16 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  Column,
-  DataType,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table({
   schema: 'biblioteca',
   tableName: 'authors',
-  timestamps: true, // createdAt, updatedAt
-  paranoid: true,   // deletedAt
+  timestamps: true,
+  paranoid: true,
 })
 export class Author extends Model<Author> {
   @ApiProperty()

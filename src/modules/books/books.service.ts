@@ -31,10 +31,7 @@ export class BooksService {
   async create(createBookDto: CreateBookDto): Promise<Book> {
     const { title } = createBookDto;
 
-    // *Verify title
-    const book = await this.verifyTitle(title);
-
-    if (book) throw new BadRequestException(BOOK_ALREADY_EXISTS_MESSAGE);
+    await this.verifyTitle(title);
 
     const newBook = await this.bookRepository.create(createBookDto);
 
@@ -80,9 +77,9 @@ export class BooksService {
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
     const { title } = updateBookDto;
 
-    const book = await this.findOne(id);
-
     if (title) await this.verifyTitle(title);
+
+    const book = await this.findOne(id);
 
     try {
       await book.update(updateBookDto);
@@ -115,11 +112,9 @@ export class BooksService {
     return book;
   }
 
-  private async verifyTitle(title: string): Promise<Book> {
+  private async verifyTitle(title: string): Promise<void> {
     const book = await this.bookRepository.findOne({ where: { title } });
 
     if (book) throw new BadRequestException(BOOK_ALREADY_EXISTS_MESSAGE);
-
-    return book;
   }
 }
