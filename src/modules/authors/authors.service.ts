@@ -6,6 +6,7 @@ import {
 } from '@/common/pagination';
 import {
   AUTHOR_ALREADY_EXISTS_MESSAGE,
+  AUTHOR_NOT_FOUND_MESSAGE,
   AUTHOR_REPOSITORY,
 } from '@/core/constants';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
@@ -56,9 +57,9 @@ export class AuthorsService {
   async update(id: number, updateAuthorDto: UpdateAuthorDto): Promise<Author> {
     const { alias } = updateAuthorDto;
 
-    await this.verifyAlias(alias);
-
     const author = await this.findByPk(id);
+
+    await this.verifyAlias(alias);
 
     return await author.update(updateAuthorDto);
   }
@@ -74,7 +75,11 @@ export class AuthorsService {
   }
 
   private readonly findByPk = async (id: number): Promise<Author> => {
-    return await this.authorRepository.findByPk(id);
+    const author = await this.authorRepository.findByPk(id);
+
+    if (!author) throw new BadRequestException(AUTHOR_NOT_FOUND_MESSAGE);
+
+    return author;
   };
 
   private async verifyAlias(alias: string): Promise<Author> {

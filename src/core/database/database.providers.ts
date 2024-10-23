@@ -1,6 +1,7 @@
 import { Author } from '@/modules/authors/entities/author.entity';
 import { Book } from '@/modules/books/entities';
 import { Person } from '@/modules/people/entities';
+import { Publisher } from '@/modules/publishers/entities';
 import { Role } from '@/modules/roles/entities';
 import { Summary1, Summary2, Summary3 } from '@/modules/summaries/entities';
 import { User } from '@/modules/users/entities/user.entity';
@@ -40,6 +41,7 @@ export const databaseProviders = [
         Summary3,
         Book,
         Author,
+        Publisher,
       ]);
 
       return sequelize;
