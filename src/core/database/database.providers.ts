@@ -1,11 +1,12 @@
+import { Book } from '@/modules/books/entities';
 import { Person } from '@/modules/people/entities';
+import { Publisher } from '@/modules/publishers/entities';
 import { Role } from '@/modules/roles/entities';
 import { Summary1, Summary2, Summary3 } from '@/modules/summaries/entities';
 import { User } from '@/modules/users/entities/user.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
 import { databaseConfig } from './config/database.config';
-import { Book } from '@/modules/books/entities';
 
 export const databaseProviders = [
   {
@@ -38,6 +39,7 @@ export const databaseProviders = [
         Summary2,
         Summary3,
         Book,
+        Publisher,
       ]);
 
       return sequelize;

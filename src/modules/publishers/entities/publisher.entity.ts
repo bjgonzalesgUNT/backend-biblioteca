@@ -1,10 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  DataType,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table({
   schema: 'biblioteca',
@@ -25,7 +20,7 @@ export class Publisher extends Model<Publisher> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true, // Aqui se verifica que no haya duplicados
+    unique: true,
   })
   name: string;
 }

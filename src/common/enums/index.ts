@@ -1,2 +1,2 @@
-export * from './methods.api';
-export * from './routes.api';
+export * from './api-methods.enum';
+export * from './api-routes.enum';
