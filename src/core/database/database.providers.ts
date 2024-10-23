@@ -1,3 +1,4 @@
+import { Author } from '@/modules/authors/entities/author.entity';
 import { Book } from '@/modules/books/entities';
 import { Person } from '@/modules/people/entities';
 import { Publisher } from '@/modules/publishers/entities';
@@ -39,6 +40,7 @@ export const databaseProviders = [
         Summary2,
         Summary3,
         Book,
+        Author,
         Publisher,
       ]);
 

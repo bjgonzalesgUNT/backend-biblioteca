@@ -5,5 +5,6 @@ export enum ERoutes {
   ROLES = 'roles',
   SUMMARIES = 'summaries',
   BOOKS = 'books',
+  AUTHORS = 'authors',
   PUBLISHERS = 'publishers',
 }

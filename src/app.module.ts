@@ -5,6 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BooksModule } from './modules/books/books.module';
 import { PeopleModule } from './modules/people/people.module';
 import { PublishersModule } from './modules/publishers/publishers.module';
+import { AuthorsModule } from './modules/authors/authors.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { SummariesModule } from './modules/summaries/summaries.module';
 import { UsersModule } from './modules/users/users.module';
@@ -20,6 +21,7 @@ import { UsersModule } from './modules/users/users.module';
     SummariesModule,
     BooksModule,
     PublishersModule,
+    AuthorsModule,
   ],
 })
 export class AppModule {}

@@ -1,8 +1,7 @@
 import { EApiMethods, ERoutes } from '@/common/enums';
+import { Auth, GetUser } from '@/modules/auth/decorators';
 import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { Auth, GetUser } from 'src/modules/auth/decorators';
-import { ERoles } from 'src/modules/auth/enums';
 import { UserDB } from '../users/dto';
 import { CreatePersonDto, UpdatePersonDto } from './dto';
 import { Person } from './entities/person.entity';
@@ -15,14 +14,14 @@ export class PeopleController {
 
   @Post(EApiMethods.CREATE)
   @ApiCreatedResponse({ type: Person })
-  @Auth(ERoles.ADMIN)
+  // @Auth(ERoles.ADMIN)
   create(@Body() createPersonDto: CreatePersonDto) {
     return this.peopleService.create(createPersonDto);
   }
 
   @Get('find-one-by-document')
   @ApiOkResponse({ type: Person })
-  @Auth()
+  // @Auth()
   findOne(@GetUser() user: UserDB) {
     return this.peopleService.findOne(user);
   }
