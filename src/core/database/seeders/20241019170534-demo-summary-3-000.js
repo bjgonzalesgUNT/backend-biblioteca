@@ -134,7 +134,7 @@ module.exports = {
         },
         { summary_2_id: 4, code: '039', description: 'En otras lenguas' },
         {
-          summary_2_id: 5,
+          summary_2_id: 6,
           code: '050',
           description: 'Publicaciones en serie generales',
         },

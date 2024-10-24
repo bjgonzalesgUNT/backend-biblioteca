@@ -1,3 +1,5 @@
+import { Author } from '@/modules/authors/entities/author.entity';
+import { Publisher } from '@/modules/publishers/entities';
 import { Summary3 } from '@/modules/summaries/entities';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
@@ -41,6 +43,7 @@ export class Book extends Model<Book> {
   deway_id: number;
 
   @ApiProperty()
+  @ForeignKey(() => Author)
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -48,6 +51,7 @@ export class Book extends Model<Book> {
   author_id: number;
 
   @ApiProperty()
+  @ForeignKey(() => Publisher)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -96,4 +100,10 @@ export class Book extends Model<Book> {
 
   @BelongsTo(() => Summary3)
   deway: Summary3;
+
+  @BelongsTo(() => Author)
+  author: Author;
+
+  @BelongsTo(() => Publisher)
+  publisher: Publisher;
 }

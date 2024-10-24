@@ -21,7 +21,7 @@ module.exports = {
           code: '030',
           description: 'Obras enciclopédicas generales',
         },
-        { summary_1_id: 1, code: '040', description: '' },
+        { summary_1_id: 1, code: '040', description: '-' },
         {
           summary_1_id: 1,
           code: '050',

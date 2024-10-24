@@ -1,7 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsDate,
   IsInt,
   IsNotEmpty,
   IsOptional,
@@ -67,7 +66,5 @@ export class CreateBookDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Type(() => Date)
-  @IsDate()
   published_at: Date;
 }

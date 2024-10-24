@@ -20,6 +20,8 @@ import { Summary1, Summary2, Summary3 } from '../summaries/entities';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities';
+import { Author } from '../authors/entities/author.entity';
+import { Publisher } from '../publishers/entities';
 
 @Injectable()
 export class BooksService {
@@ -48,12 +50,22 @@ export class BooksService {
       include: [
         {
           model: Summary3,
-          include: [{ model: Summary2, include: [Summary1] }],
+          paranoid: false,
+          include: [
+            {
+              model: Summary2,
+              paranoid: false,
+              include: [{ model: Summary1, paranoid: false }],
+            },
+          ],
         },
+        { model: Author, paranoid: false },
+        Publisher,
       ],
       limit,
       offset,
       paranoid: false,
+      order: [['createdAt', 'DESC']],
     });
 
     return this.paginationService.paginate({

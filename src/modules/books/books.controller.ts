@@ -7,7 +7,6 @@ import { ParseIdPipe } from '@/common/pipes/parse-id.pipe';
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Patch,
@@ -52,7 +51,7 @@ export class BooksController {
     return this.booksService.update(id, updateBookDto);
   }
 
-  @Delete(EApiMethods.CHANGE_STATUS)
+  @Patch(EApiMethods.CHANGE_STATUS)
   changeStatus(@Param('id', ParseIdPipe) id: number) {
     return this.booksService.changeStatus(id);
   }
