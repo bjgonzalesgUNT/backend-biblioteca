@@ -1,5 +1,9 @@
+import { Author } from '@/modules/authors/entities/author.entity';
+import { Book } from '@/modules/books/entities';
 import { Person } from '@/modules/people/entities';
+import { Publisher } from '@/modules/publishers/entities';
 import { Role } from '@/modules/roles/entities';
+import { Summary1, Summary2, Summary3 } from '@/modules/summaries/entities';
 import { User } from '@/modules/users/entities/user.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { DEVELOPMENT, PRODUCTION, SEQUELIZE, TEST } from '../constants';
@@ -28,7 +32,17 @@ export const databaseProviders = [
         define: { freezeTableName: true },
       });
 
-      sequelize.addModels([User, Role, Person]);
+      sequelize.addModels([
+        User,
+        Role,
+        Person,
+        Summary1,
+        Summary2,
+        Summary3,
+        Book,
+        Author,
+        Publisher,
+      ]);
 
       return sequelize;
     },

@@ -19,6 +19,6 @@ export class ResponsePaginationDto<T> {
   @ApiProperty()
   next: string | null;
 
-  @ApiProperty()
+  @ApiProperty({ type: [Object] })
   rows: T[];
 }

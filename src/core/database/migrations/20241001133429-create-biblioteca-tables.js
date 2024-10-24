@@ -1,5 +1,7 @@
 'use strict';
 
+const sequelize = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -35,16 +37,21 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
-        person_id: {
-          type: Sequelize.INTEGER,
+        surnames: {
+          type: Sequelize.STRING,
           allowNull: false,
-          references: {
-            model: {
-              schema: 'sistemas',
-              tableName: 'people',
-            },
-            key: 'id',
-          },
+        },
+        names: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        nationality: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        gender: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         alias: {
           type: Sequelize.STRING,
@@ -58,11 +65,11 @@ module.exports = {
       },
     );
 
-    // *Create table editorial
+    // *Create table publishers
     await queryInterface.createTable(
       {
         schema,
-        tableName: 'editorial',
+        tableName: 'publishers',
       },
       {
         id: {
@@ -79,11 +86,11 @@ module.exports = {
       },
     );
 
-    // *Create table categories
+    // *Summary 1
     await queryInterface.createTable(
       {
         schema,
-        tableName: 'categories',
+        tableName: 'summary_1',
       },
       {
         id: {
@@ -91,13 +98,86 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
-        name: {
+        code: {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true,
         },
         description: {
           type: Sequelize.STRING,
+          allowNull: false,
+        },
+        ...timestamp,
+      },
+    );
+
+    // *Summary 2
+    await queryInterface.createTable(
+      {
+        schema,
+        tableName: 'summary_2',
+      },
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        summary_1_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_1',
+            },
+            key: 'id',
+          },
+        },
+        code: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        description: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        ...timestamp,
+      },
+    );
+
+    // *Summary 3
+    await queryInterface.createTable(
+      {
+        schema,
+        tableName: 'summary_3',
+      },
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
+        summary_2_id: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_2',
+            },
+            key: 'id',
+          },
+        },
+        code: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        description: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         ...timestamp,
       },
@@ -120,6 +200,17 @@ module.exports = {
           allowNull: false,
           unique: true,
         },
+        deway_id: {
+          type: sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: {
+              schema,
+              tableName: 'summary_3',
+            },
+            key: 'id',
+          },
+        },
         author_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -131,13 +222,13 @@ module.exports = {
             key: 'id',
           },
         },
-        editorial_id: {
+        publisher_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
             model: {
               schema,
-              tableName: 'editorial',
+              tableName: 'publishers',
             },
             key: 'id',
           },
@@ -163,39 +254,6 @@ module.exports = {
         published_at: {
           type: Sequelize.STRING,
           allowNull: false,
-        },
-        ...timestamp,
-      },
-    );
-
-    // *Create table books_categories
-    await queryInterface.createTable(
-      {
-        schema,
-        tableName: 'books_categories',
-      },
-      {
-        book_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'books',
-            },
-            key: 'id',
-          },
-        },
-        category_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          references: {
-            model: {
-              schema,
-              tableName: 'categories',
-            },
-            key: 'id',
-          },
         },
         ...timestamp,
       },
@@ -244,28 +302,43 @@ module.exports = {
       tableName: 'co_authorship',
     });
 
-    // *Drop table books_categories
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'books_categories',
-    });
-
     // *Drop table books
     await queryInterface.dropTable({
       schema,
       tableName: 'books',
     });
 
-    // *Drop table categories
-    await queryInterface.dropTable({
-      schema,
-      tableName: 'categories',
-    });
+    // *Drop table summary_3
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_3',
+      },
+      { cascade: true },
+    );
 
-    // *Drop table editorial
+    // *Drop table summary_2
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_2',
+      },
+      { cascade: true },
+    );
+
+    // *Drop table summary_1
+    await queryInterface.dropTable(
+      {
+        schema,
+        tableName: 'summary_1',
+      },
+      { cascade: true },
+    );
+
+    // *Drop table publishers
     await queryInterface.dropTable({
       schema,
-      tableName: 'editorial',
+      tableName: 'publishers',
     });
 
     // *Drop table authors

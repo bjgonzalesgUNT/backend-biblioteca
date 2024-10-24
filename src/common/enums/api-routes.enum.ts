@@ -3,4 +3,8 @@ export enum ERoutes {
   AUTH = 'auth',
   PEOPLE = 'people',
   ROLES = 'roles',
+  SUMMARIES = 'summaries',
+  BOOKS = 'books',
+  AUTHORS = 'authors',
+  PUBLISHERS = 'publishers',
 }

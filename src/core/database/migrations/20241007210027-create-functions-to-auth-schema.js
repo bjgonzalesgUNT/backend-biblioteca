@@ -109,7 +109,8 @@ module.exports = {
       `
       drop function sistemas.fn_get_user_by_username(_username varchar);
       drop function sistemas.fn_get_users_paginate(_limit int4, _offset int4);
-      drop function sistemas.fn_get_person_by_document(_document varchar);
+      drop function sistemas.fn_get_person_by_document (_document varchar);
+
       `,
     );
   },
