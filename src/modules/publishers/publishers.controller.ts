@@ -50,7 +50,7 @@ export class PublishersController {
     return this.publishersService.update(+id, updatePublisherDto);
   }
 
-  @Delete(EApiMethods.CHANGE_STATUS)
+  @Patch(EApiMethods.CHANGE_STATUS)
   changeStatus(@Param('id') id: string) {
     return this.publishersService.changeStatus(+id);
   }
