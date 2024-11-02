@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateAuthorDto } from './create-author.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsUrl } from 'class-validator';
 
-export class UpdateAuthorDto extends PartialType(CreateAuthorDto) {}
+export class UpdateAuthorDto {
+  @ApiProperty()
+  @IsOptional()
+  @IsUrl()
+  image_url?: string;
+}

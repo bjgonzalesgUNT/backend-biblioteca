@@ -5,7 +5,7 @@ import {
   ResponsePaginationDto,
 } from '@/common/pagination';
 import {
-  AUTHOR_ALREADY_EXISTS_MESSAGE,
+  AUTHOR_ALIAS_ALREADY_EXISTS_MESSAGE,
   AUTHOR_NOT_FOUND_MESSAGE,
   AUTHOR_REPOSITORY,
 } from '@/core/constants';
@@ -42,6 +42,7 @@ export class AuthorsService {
     const { count, rows } = await this.authorRepository.findAndCountAll({
       limit,
       offset,
+      order: [['createdAt', 'DESC']],
     });
 
     return this.paginationService.paginate({
@@ -55,11 +56,7 @@ export class AuthorsService {
   }
 
   async update(id: number, updateAuthorDto: UpdateAuthorDto): Promise<Author> {
-    const { alias } = updateAuthorDto;
-
     const author = await this.findByPk(id);
-
-    await this.verifyAlias(alias);
 
     return await author.update(updateAuthorDto);
   }
@@ -85,7 +82,8 @@ export class AuthorsService {
   private async verifyAlias(alias: string): Promise<Author> {
     const author = await this.authorRepository.findOne({ where: { alias } });
 
-    if (author) throw new BadRequestException(AUTHOR_ALREADY_EXISTS_MESSAGE);
+    if (author)
+      throw new BadRequestException(AUTHOR_ALIAS_ALREADY_EXISTS_MESSAGE);
 
     return author;
   }
