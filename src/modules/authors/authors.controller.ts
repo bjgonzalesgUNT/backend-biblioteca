@@ -52,7 +52,7 @@ export class AuthorsController {
     return this.authorsService.update(id, updateAuthorDto);
   }
 
-  @Delete(EApiMethods.CHANGE_STATUS)
+  @Patch(EApiMethods.CHANGE_STATUS)
   changeStatus(@Param('id', ParseIdPipe) id: number) {
     return this.authorsService.changeStatus(id);
   }
