@@ -7,7 +7,6 @@ import { ParseIdPipe } from '@/common/pipes/parse-id.pipe';
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Patch,
@@ -41,6 +40,18 @@ export class AuthorsController {
   @ApiOkResponse({ type: ResponsePaginationDto<Author> })
   findAllPaginate(@Query() createPaginationDto: CreatePaginationDto) {
     return this.authorsService.findAllPaginate(createPaginationDto);
+  }
+
+  @Get('find-by-filter-paginate/:filter')
+  @ApiOkResponse({ type: ResponsePaginationDto<Author> })
+  findByFilterPaginate(
+    @Param('filter') filter: string,
+    @Query() createPaginationDto: CreatePaginationDto,
+  ) {
+    return this.authorsService.findByFilterPaginate(
+      filter,
+      createPaginationDto,
+    );
   }
 
   @Patch(EApiMethods.UPDATE)

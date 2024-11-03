@@ -18,6 +18,7 @@ import {
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { Publisher } from './entities';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class PublishersService {
@@ -53,6 +54,34 @@ export class PublishersService {
 
     return this.paginationService.paginate({
       apiMethod: EApiMethods.FIND_ALL_PAGINATE,
+      apiRoute: ERoutes.PUBLISHERS,
+      data: rows,
+      limit,
+      page: createPaginationDto.page,
+      total: count,
+    });
+  }
+
+  async findByNamePaginate(
+    name: string,
+    createPaginationDto: CreatePaginationDto,
+  ) {
+    const { limit, offset } =
+      this.paginationService.generate(createPaginationDto);
+
+    const { rows, count } = await this.publisherRepository.findAndCountAll({
+      where: {
+        name: {
+          [Op.like]: `%${name}%`,
+        },
+      },
+      limit,
+      offset,
+      paranoid: false,
+    });
+
+    return this.paginationService.paginate({
+      apiMethod: `find-by-name-paginate/${name}`,
       apiRoute: ERoutes.PUBLISHERS,
       data: rows,
       limit,

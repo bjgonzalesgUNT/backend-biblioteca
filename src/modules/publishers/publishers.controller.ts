@@ -1,8 +1,11 @@
 import { EApiMethods, ERoutes } from '@/common/enums';
 import {
+  CreatePaginationDto,
+  ResponsePaginationDto,
+} from '@/common/pagination';
+import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Patch,
@@ -14,10 +17,6 @@ import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { Publisher } from './entities';
 import { PublishersService } from './publishers.service';
-import {
-  CreatePaginationDto,
-  ResponsePaginationDto,
-} from '@/common/pagination';
 
 @Controller(ERoutes.PUBLISHERS)
 @ApiTags(ERoutes.PUBLISHERS)
@@ -40,6 +39,15 @@ export class PublishersController {
   @ApiOkResponse({ type: ResponsePaginationDto<Publisher> })
   findAllPaginate(@Query() createPaginationDto?: CreatePaginationDto) {
     return this.publishersService.findAllPaginate(createPaginationDto);
+  }
+
+  @Get('find-by-name-paginate/:name')
+  @ApiOkResponse({ type: ResponsePaginationDto<Publisher> })
+  findByNamePaginate(
+    @Param('name') name: string,
+    @Query() createPaginationDto?: CreatePaginationDto,
+  ) {
+    return this.publishersService.findByNamePaginate(name, createPaginationDto);
   }
 
   @Patch(EApiMethods.UPDATE)

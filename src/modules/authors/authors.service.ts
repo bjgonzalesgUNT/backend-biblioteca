@@ -13,6 +13,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 import { Author } from './entities/author.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class AuthorsService {
@@ -47,6 +48,37 @@ export class AuthorsService {
 
     return this.paginationService.paginate({
       apiMethod: EApiMethods.FIND_ALL_PAGINATE,
+      apiRoute: ERoutes.AUTHORS,
+      data: rows,
+      limit,
+      page: createPaginationDto.page,
+      total: count,
+    });
+  }
+
+  async findByFilterPaginate(
+    filter: string,
+    createPaginationDto: CreatePaginationDto,
+  ): Promise<ResponsePaginationDto<Author>> {
+    const { limit, offset } =
+      this.paginationService.generate(createPaginationDto);
+
+    const { count, rows } = await this.authorRepository.findAndCountAll({
+      limit,
+      offset,
+      order: [['createdAt', 'DESC']],
+      where: {
+        [Op.or]: {
+          alias: { [Op.like]: `%${filter}%` },
+          names: { [Op.like]: `%${filter}%` },
+          surnames: { [Op.like]: `%${filter}%` },
+          nationality: { [Op.like]: `%${filter}%` },
+        },
+      },
+    });
+
+    return this.paginationService.paginate({
+      apiMethod: `find-by-filter-paginate/${filter}`,
       apiRoute: ERoutes.AUTHORS,
       data: rows,
       limit,

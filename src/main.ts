@@ -67,7 +67,7 @@ async function bootstrap() {
   envs.nodeEnv != 'production'
     ? Logger.log(
         'Boostrapt',
-        `🚀 Server ready at ${HOST}:${PORT.toString().cyan.bold}`,
+        `🚀 Server ready at http://${HOST}:${PORT.toString().cyan.bold}`,
       )
     : Logger.log(
         'Boostrapt',
