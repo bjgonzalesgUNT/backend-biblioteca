@@ -22,6 +22,7 @@ import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities';
 import { Author } from '../authors/entities/author.entity';
 import { Publisher } from '../publishers/entities';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class BooksService {
@@ -47,6 +48,54 @@ export class BooksService {
       this.paginationService.generate(createPaginationDto);
 
     const { count, rows } = await this.bookRepository.findAndCountAll({
+      include: [
+        {
+          model: Summary3,
+          paranoid: false,
+          include: [
+            {
+              model: Summary2,
+              paranoid: false,
+              include: [{ model: Summary1, paranoid: false }],
+            },
+          ],
+        },
+        { model: Author, paranoid: false },
+        Publisher,
+      ],
+      limit,
+      offset,
+      paranoid: false,
+      order: [['createdAt', 'DESC']],
+    });
+
+    return this.paginationService.paginate({
+      apiMethod: EApiMethods.FIND_ALL_PAGINATE,
+      apiRoute: ERoutes.BOOKS,
+      data: rows,
+      limit,
+      page: createPaginationDto.page,
+      total: count,
+    });
+  }
+
+  async findByFilterPaginate(
+    filter: string,
+    createPaginationDto: CreatePaginationDto,
+  ): Promise<ResponsePaginationDto<Book>> {
+    const { limit, offset } =
+      this.paginationService.generate(createPaginationDto);
+
+    const { count, rows } = await this.bookRepository.findAndCountAll({
+      where: {
+        [Op.or]: {
+          title: { [Op.iLike]: `%${filter}%` },
+          '$author.alias$': { [Op.iLike]: `%${filter}%` },
+          '$author.surnames$': { [Op.iLike]: `%${filter}%` },
+          '$author.names$': { [Op.iLike]: `%${filter}%` },
+          '$deway.description$': { [Op.iLike]: `%${filter}%` },
+        },
+      },
       include: [
         {
           model: Summary3,

@@ -42,6 +42,15 @@ export class BooksController {
     return this.booksService.findOne(id);
   }
 
+  @Get('find-by-filter-paginate/:filter')
+  @ApiOkResponse({ type: Book })
+  findByFilterPaginate(
+    @Param('filter') filter: string,
+    @Query() createPaginationDto: CreatePaginationDto,
+  ) {
+    return this.booksService.findByFilterPaginate(filter, createPaginationDto);
+  }
+
   @Patch(EApiMethods.UPDATE)
   @ApiOkResponse({ type: Book })
   update(
