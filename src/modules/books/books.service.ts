@@ -94,6 +94,7 @@ export class BooksService {
           '$author.surnames$': { [Op.iLike]: `%${filter}%` },
           '$author.names$': { [Op.iLike]: `%${filter}%` },
           '$deway.description$': { [Op.iLike]: `%${filter}%` },
+          '$publisher.name$': { [Op.iLike]: `%${filter}%` },
         },
       },
       include: [
