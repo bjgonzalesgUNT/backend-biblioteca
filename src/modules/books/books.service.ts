@@ -4,25 +4,16 @@ import {
   PaginationService,
   ResponsePaginationDto,
 } from '@/common/pagination';
-import {
-  BOOK_ALREADY_EXISTS_MESSAGE,
-  BOOK_NOT_FOUND_MESSAGE,
-  BOOK_REPOSITORY,
-} from '@/core/constants';
+import { BOOK_NOT_FOUND_MESSAGE, BOOK_REPOSITORY } from '@/core/constants';
 import { handlerExceptions } from '@/core/database/handlers';
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Op } from 'sequelize';
+import { Author } from '../authors/entities/author.entity';
+import { Publisher } from '../publishers/entities';
 import { Summary1, Summary2, Summary3 } from '../summaries/entities';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities';
-import { Author } from '../authors/entities/author.entity';
-import { Publisher } from '../publishers/entities';
-import { Op } from 'sequelize';
 
 @Injectable()
 export class BooksService {
@@ -32,12 +23,7 @@ export class BooksService {
   ) {}
 
   async create(createBookDto: CreateBookDto): Promise<Book> {
-    const { title } = createBookDto;
-
-    await this.verifyTitle(title);
-
     const newBook = await this.bookRepository.create(createBookDto);
-
     return this.findByPk(newBook.id);
   }
 
@@ -137,10 +123,6 @@ export class BooksService {
   }
 
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
-    const { title } = updateBookDto;
-
-    if (title) await this.verifyTitle(title);
-
     const book = await this.findOne(id);
 
     try {
@@ -166,17 +148,20 @@ export class BooksService {
       include: [
         {
           model: Summary3,
-          include: [{ model: Summary2, include: [Summary1] }],
+          paranoid: false,
+          include: [
+            {
+              model: Summary2,
+              paranoid: false,
+              include: [{ model: Summary1, paranoid: false }],
+            },
+          ],
         },
+        { model: Author, paranoid: false },
+        Publisher,
       ],
     });
 
     return book;
-  }
-
-  private async verifyTitle(title: string): Promise<void> {
-    const book = await this.bookRepository.findOne({ where: { title } });
-
-    if (book) throw new BadRequestException(BOOK_ALREADY_EXISTS_MESSAGE);
   }
 }

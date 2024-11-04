@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsInt,
   IsNotEmpty,
@@ -12,6 +12,7 @@ import {
 export class CreateBookDto {
   @ApiProperty()
   @IsNotEmpty()
+  @Transform(({ value }) => value.toUpperCase())
   title: string;
 
   @ApiProperty()
@@ -38,6 +39,7 @@ export class CreateBookDto {
   @ApiProperty()
   @IsNotEmpty()
   @MinLength(10)
+  @Transform(({ value }) => value.toUpperCase())
   description: string;
 
   @ApiProperty()
