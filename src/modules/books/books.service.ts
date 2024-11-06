@@ -4,9 +4,18 @@ import {
   PaginationService,
   ResponsePaginationDto,
 } from '@/common/pagination';
-import { BOOK_NOT_FOUND_MESSAGE, BOOK_REPOSITORY } from '@/core/constants';
+import {
+  BOOK_ALREADY_EXISTS_MESSAGE,
+  BOOK_NOT_FOUND_MESSAGE,
+  BOOK_REPOSITORY,
+} from '@/core/constants';
 import { handlerExceptions } from '@/core/database/handlers';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Op } from 'sequelize';
 import { Author } from '../authors/entities/author.entity';
 import { Publisher } from '../publishers/entities';
@@ -23,7 +32,12 @@ export class BooksService {
   ) {}
 
   async create(createBookDto: CreateBookDto): Promise<Book> {
+    const { title, author_id, edition } = createBookDto;
+
+    await this.validateDuplicate(title, author_id, edition);
+
     const newBook = await this.bookRepository.create(createBookDto);
+
     return this.findByPk(newBook.id);
   }
 
@@ -123,6 +137,10 @@ export class BooksService {
   }
 
   async update(id: number, updateBookDto: UpdateBookDto): Promise<Book> {
+    const { title, author_id, edition } = updateBookDto;
+
+    await this.validateDuplicate(title, author_id, edition);
+
     const book = await this.findOne(id);
 
     try {
@@ -163,5 +181,17 @@ export class BooksService {
     });
 
     return book;
+  }
+
+  private async validateDuplicate(
+    title: string,
+    authorId: number,
+    edition: number,
+  ): Promise<void> {
+    const book = await this.bookRepository.findOne({
+      where: { title, author_id: authorId, edition },
+    });
+
+    if (book) throw new BadRequestException(BOOK_ALREADY_EXISTS_MESSAGE);
   }
 }

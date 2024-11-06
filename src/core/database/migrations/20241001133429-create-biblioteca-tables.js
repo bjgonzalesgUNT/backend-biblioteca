@@ -198,7 +198,6 @@ module.exports = {
         title: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: true,
         },
         deway_id: {
           type: sequelize.INTEGER,
