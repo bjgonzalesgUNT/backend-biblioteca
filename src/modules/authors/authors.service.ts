@@ -10,10 +10,10 @@ import {
   AUTHOR_REPOSITORY,
 } from '@/core/constants';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Op } from 'sequelize';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 import { Author } from './entities/author.entity';
-import { Op } from 'sequelize';
 
 @Injectable()
 export class AuthorsService {
@@ -43,6 +43,7 @@ export class AuthorsService {
     const { count, rows } = await this.authorRepository.findAndCountAll({
       limit,
       offset,
+      paranoid: false,
       order: [['createdAt', 'DESC']],
     });
 
@@ -64,9 +65,6 @@ export class AuthorsService {
       this.paginationService.generate(createPaginationDto);
 
     const { count, rows } = await this.authorRepository.findAndCountAll({
-      limit,
-      offset,
-      order: [['createdAt', 'DESC']],
       where: {
         [Op.or]: {
           alias: { [Op.like]: `%${filter}%` },
@@ -75,6 +73,10 @@ export class AuthorsService {
           nationality: { [Op.like]: `%${filter}%` },
         },
       },
+      limit,
+      offset,
+      paranoid: false,
+      order: [['createdAt', 'DESC']],
     });
 
     return this.paginationService.paginate({

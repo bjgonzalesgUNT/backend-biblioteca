@@ -15,10 +15,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Op } from 'sequelize';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { Publisher } from './entities';
-import { Op } from 'sequelize';
 
 @Injectable()
 export class PublishersService {
@@ -37,7 +37,7 @@ export class PublishersService {
   }
 
   async findAll(): Promise<Publisher[]> {
-    return this.publisherRepository.findAll();
+    return this.publisherRepository.findAll({ order: [['createdAt', 'DESC']] });
   }
 
   async findAllPaginate(
@@ -50,6 +50,7 @@ export class PublishersService {
       limit,
       offset,
       paranoid: false,
+      order: [['createdAt', 'DESC']],
     });
 
     return this.paginationService.paginate({
@@ -78,6 +79,7 @@ export class PublishersService {
       limit,
       offset,
       paranoid: false,
+      order: [['createdAt', 'DESC']],
     });
 
     return this.paginationService.paginate({

@@ -28,7 +28,7 @@ export class CreateAuthorDto {
   @Transform(({ value }) => value.toUpperCase())
   alias?: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   @IsUrl()
   image_url?: string;
