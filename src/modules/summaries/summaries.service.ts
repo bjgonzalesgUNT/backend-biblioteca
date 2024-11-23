@@ -5,6 +5,7 @@ import {
 } from '@/core/constants/keys.constants';
 import { Inject, Injectable } from '@nestjs/common';
 import { Summary1, Summary2, Summary3 } from './entities';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class SummariesService {
@@ -26,6 +27,10 @@ export class SummariesService {
   }
 
   async findAllS3(): Promise<Summary3[]> {
-    return await this.summary3Repository.findAll();
+    return await this.summary3Repository.findAll({
+      where: {
+        description: { [Op.not]: '-', [Op.like]: '%NOVELA%' },
+      },
+    });
   }
 }
