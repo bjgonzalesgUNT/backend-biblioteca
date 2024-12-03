@@ -12,7 +12,8 @@ module.exports = {
           nationality: 'COLOMBIANA',
           gender: 'M',
           alias: 'GABO',
-          image_url: 'https://example.com/images/authors/gabo.jpg',
+          image_url:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL3i1NG0Z9kx_ix0MOPa-RHHsSWtxKOJQoCQ&s',
         },
         {
           surnames: 'KING',
@@ -20,7 +21,8 @@ module.exports = {
           nationality: 'ESTADOUNIDENSE',
           gender: 'M',
           alias: 'STEPHEN KING',
-          image_url: 'https://example.com/images/authors/stephen_king.jpg',
+          image_url:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY4c0DAw7ZxDZeFA-0G6gfcZ-emJxTWPQjyw&s',
         },
         {
           surnames: 'ROWLING',
@@ -28,7 +30,8 @@ module.exports = {
           nationality: 'BRITÁNICA',
           gender: 'F',
           alias: 'J.K. ROWLING',
-          image_url: 'https://example.com/images/authors/jk_rowling.jpg',
+          image_url:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzafloXl0vxl70MV-YQcA9Nc0kyFa_bx0kUg&s',
         },
         {
           surnames: 'ALLENDE',
@@ -36,7 +39,8 @@ module.exports = {
           nationality: 'CHILENA',
           gender: 'F',
           alias: 'ISABEL ALLENDE',
-          image_url: 'https://example.com/images/authors/isabel_allende.jpg',
+          image_url:
+            'https://upload.wikimedia.org/wikipedia/commons/d/d0/Isabel_Allende_Frankfurter_Buchmesse_2015_%28cropped%29.JPG',
         },
         {
           surnames: 'MURAKAMI',
@@ -44,7 +48,8 @@ module.exports = {
           nationality: 'JAPONESA',
           gender: 'M',
           alias: 'HARUKI MURAKAMI',
-          image_url: 'https://example.com/images/authors/haruki_murakami.jpg',
+          image_url:
+            'https://upload.wikimedia.org/wikipedia/commons/5/51/Conversatorio_Haruki_Murakami_%2812_de_12%29_%2845747009452%29_%28cropped%29.jpg',
         },
         {
           surnames: 'COELHO',
@@ -52,7 +57,7 @@ module.exports = {
           nationality: 'BRASILEÑA',
           gender: 'M',
           alias: 'PAULO COELHO',
-          image_url: 'https://example.com/images/authors/paulo_coelho.jpg',
+          image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShXISu1H13cz5QcR3pHQCcNU6D_2v4sCJE-Q&s',
         },
         {
           surnames: 'AUSTEN',
@@ -60,7 +65,7 @@ module.exports = {
           nationality: 'BRITÁNICA',
           gender: 'F',
           alias: 'JANE AUSTEN',
-          image_url: 'https://example.com/images/authors/jane_austen.jpg',
+          image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsNGpyFKjOSKZ451ESd0JH9m1cE1gIVy_ZVw&s',
         },
         {
           surnames: 'HEMINGWAY',
@@ -68,7 +73,7 @@ module.exports = {
           nationality: 'ESTADOUNIDENSE',
           gender: 'M',
           alias: 'ERNEST HEMINGWAY',
-          image_url: 'https://example.com/images/authors/ernest_hemingway.jpg',
+          image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/ErnestHemingway.jpg/1200px-ErnestHemingway.jpg',
         },
         {
           surnames: 'NERUDA',
@@ -76,7 +81,7 @@ module.exports = {
           nationality: 'CHILENA',
           gender: 'M',
           alias: 'PABLO NERUDA',
-          image_url: 'https://example.com/images/authors/pablo_neruda.jpg',
+          image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Pablo_Neruda_1963.jpg/220px-Pablo_Neruda_1963.jpg',
         },
         {
           surnames: 'DICKENS',
@@ -84,7 +89,7 @@ module.exports = {
           nationality: 'BRITÁNICA',
           gender: 'M',
           alias: 'CHARLES DICKENS',
-          image_url: 'https://example.com/images/authors/charles_dickens.jpg',
+          image_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Dickens_Gurney_head.jpg/640px-Dickens_Gurney_head.jpg',
         },
       ],
     );

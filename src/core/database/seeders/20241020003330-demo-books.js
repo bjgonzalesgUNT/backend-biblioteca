@@ -19,7 +19,7 @@ module.exports = {
         pages: 320,
         edition: '3',
         path: '/books/introduccion_filosofia.pdf',
-        image_url: 'https://example.com/images/introduccion_filosofia.jpg',
+        image_url: 'https://www.cervantesvirtual.com/portadas/057/0579633/Cover.jpg',
         published_at: '2015-06-15',
       },
       {
@@ -32,7 +32,7 @@ module.exports = {
         pages: 450,
         edition: '1',
         path: '/books/historia_cristianismo.pdf',
-        image_url: 'https://example.com/images/historia_cristianismo.jpg',
+        image_url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/3f/78/3f7893eb4493f1a2a124e5ae4c5d6229.jpg',
         published_at: '2018-09-10',
       },
       {
@@ -45,7 +45,7 @@ module.exports = {
         pages: 600,
         edition: '2',
         path: '/books/calculo_avanzado.pdf',
-        image_url: 'https://example.com/images/calculo_avanzado.jpg',
+        image_url: 'https://images-na.ssl-images-amazon.com/images/P/9587612396.01.LZZZZZZZ.jpg',
         published_at: '2020-01-20',
       },
       {
@@ -58,7 +58,7 @@ module.exports = {
         pages: 500,
         edition: '4',
         path: '/books/quimica_organica.pdf',
-        image_url: 'https://example.com/images/quimica_organica.jpg',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7L4DAcvwH2RgOcfFtOM4xZiGcff2az3fQAQ&s',
         published_at: '2017-03-05',
       },
       {
@@ -71,7 +71,7 @@ module.exports = {
         pages: 700,
         edition: '5',
         path: '/books/historia_europa.pdf',
-        image_url: 'https://example.com/images/historia_europa.jpg',
+        image_url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/d3/4b/d34bb37c1f626883df2432c6b9c4182c.jpg',
         published_at: '2019-11-25',
       },
       {
@@ -83,7 +83,7 @@ module.exports = {
         pages: 420,
         edition: '2',
         path: '/books/psicologia_desarrollo.pdf',
-        image_url: 'https://example.com/images/psicologia_desarrollo.jpg',
+        image_url: 'https://images.cdn1.buscalibre.com/fit-in/360x360/83/e8/83e81530c5d2ed30544439f0d84b899e.jpg',
         published_at: '2016-08-30',
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
         pages: 550,
         edition: '3',
         path: '/books/derecho_internacional.pdf',
-        image_url: 'https://example.com/images/derecho_internacional.jpg',
+        image_url: 'https://images.cdn3.buscalibre.com/fit-in/360x360/67/74/67742e5b8943fd877f9dd4b5447ae86d.jpg',
         published_at: '2021-04-15',
       },
       {
@@ -109,7 +109,7 @@ module.exports = {
         pages: 480,
         edition: '1',
         path: '/books/ingenieria_civil_moderna.pdf',
-        image_url: 'https://example.com/images/ingenieria_civil_moderna.jpg',
+        image_url: 'https://static.bookscovers.es/imagenes/9788433/978843385977.JPG',
         published_at: '2019-07-22',
       },
       {
@@ -123,7 +123,7 @@ module.exports = {
         edition: '2',
         path: '/books/literatura_espanola_contemporanea.pdf',
         image_url:
-        'https://example.com/images/literatura_espanola_contemporanea.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1xHwsEMqOuQa4uxEUdXkbEU80R7bKBpqAzA&s',
         published_at: '2017-12-10',
       },
       {
@@ -136,7 +136,7 @@ module.exports = {
         pages: 530,
         edition: '4',
         path: '/books/biologia_molecular.pdf',
-        image_url: 'https://example.com/images/biologia_molecular.jpg',
+        image_url: 'https://images.cdn2.buscalibre.com/fit-in/360x360/f5/00/f5002a0b2262a281be36aa9ef366f5b0.jpg',
         published_at: '2022-02-18',
       },
       {
@@ -149,7 +149,7 @@ module.exports = {
         pages: 417,
         edition: '1',
         path: '/books/cien_anos_de_soledad.pdf',
-        image_url: 'https://example.com/images/cien_anos_de_soledad.jpg',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7dXoJiY12g6g1U7TdRx44MQ3BT8KW2DA18A&s',
         published_at: '1967-05-30',
       },
       {
@@ -162,7 +162,7 @@ module.exports = {
         pages: 447,
         edition: '1',
         path: '/books/el_resplandecimiento.pdf',
-        image_url: 'https://example.com/images/el_resplandecimiento.jpg',
+        image_url: 'https://simehbucket.s3.amazonaws.com/images/3012e4fbe03f911b804ed3e00d720983-large.jpg',
         published_at: '1977-01-28',
       },
       {
@@ -176,7 +176,7 @@ module.exports = {
         edition: '1',
         path: '/books/harry_potter_piedra_filosofal.pdf',
         image_url:
-        'https://example.com/images/harry_potter_piedra_filosofal.jpg',
+        'https://www.mrbooks.com/mrbooks/portadas/9789585234048.webp',
         published_at: '1997-06-26',
       },
       {
@@ -189,7 +189,7 @@ module.exports = {
         pages: 368,
         edition: '1',
         path: '/books/la_casa_de_los_espiritus.pdf',
-        image_url: 'https://example.com/images/la_casa_de_los_espiritus.jpg',
+        image_url: 'https://www.mrbooks.com/mrbooks/portadas/9789588611778.webp',
         published_at: '1982-10-15',
       },
       {
@@ -202,7 +202,7 @@ module.exports = {
         pages: 505,
         edition: '1',
         path: '/books/kafka_en_la_orilla.pdf',
-        image_url: 'https://example.com/images/kafka_en_la_orilla.jpg',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwASed6zmASidCSYGVothCPKoVxCUDd-CddA&s',
         published_at: '2002-09-12',
       },
       {
@@ -215,7 +215,7 @@ module.exports = {
         pages: 208,
         edition: '1',
         path: '/books/el_alquimista.pdf',
-        image_url: 'https://example.com/images/el_alquimista.jpg',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxoERl_fQgRTT8qziR6SA8UbR-ZFxGO5XkUg&s',
         published_at: '1988-05-01',
       },
       {
@@ -228,7 +228,7 @@ module.exports = {
         pages: 279,
         edition: '1',
         path: '/books/orgullo_y_prejuicio.pdf',
-        image_url: 'https://example.com/images/orgullo_y_prejuicio.jpg',
+        image_url: 'https://www.mrbooks.com/mrbooks/portadas/9789588925738.webp',
         published_at: '1813-01-28',
       },
       {
@@ -241,7 +241,7 @@ module.exports = {
         pages: 127,
         edition: '1',
         path: '/books/el_viejo_y_el_mar.pdf',
-        image_url: 'https://example.com/images/el_viejo_y_el_mar.jpg',
+        image_url: 'https://www.mrbooks.com/mrbooks/portadas/9786287513099.webp',
         published_at: '1952-09-01',
       },
       {
@@ -254,7 +254,7 @@ module.exports = {
         pages: 64,
         edition: '1',
         path: '/books/veinte_poemas_de_amor.pdf',
-        image_url: 'https://example.com/images/veinte_poemas_de_amor.jpg',
+        image_url: 'https://www.mrbooks.com/mrbooks/portadas/9788418395796.webp',
         published_at: '1924-06-01',
       },
       {
@@ -267,7 +267,7 @@ module.exports = {
         pages: 341,
         edition: '1',
         path: '/books/historia_de_dos_ciudades.pdf',
-        image_url: 'https://example.com/images/historia_de_dos_ciudades.jpg',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iLs4LZ4jYRc2oJ15l8PpBl4a-F6ZUmYcMw&s',
         published_at: '1859-04-30',
       },
       ],
