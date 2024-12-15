@@ -21,7 +21,7 @@ export class PeopleController {
 
   @Get('find-one-by-document')
   @ApiOkResponse({ type: Person })
-  // @Auth()
+  @Auth()
   findOne(@GetUser() user: UserDB) {
     return this.peopleService.findOne(user);
   }
