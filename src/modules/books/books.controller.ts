@@ -16,6 +16,7 @@ import {
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
+import { QueryFindByFilterPublicDto } from './dto/queries';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities';
 
@@ -49,6 +50,12 @@ export class BooksController {
     @Query() createPaginationDto: CreatePaginationDto,
   ) {
     return this.booksService.findByFilterPaginate(filter, createPaginationDto);
+  }
+
+  @Get('find-by-filter-public-paginate')
+  @ApiOkResponse({ type: Book })
+  findByFilterPublicPaginate(@Query() query: QueryFindByFilterPublicDto) {
+    return this.booksService.findByFilterPublicPaginate(query);
   }
 
   @Patch(EApiMethods.UPDATE)

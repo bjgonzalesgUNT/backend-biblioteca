@@ -16,11 +16,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Op } from 'sequelize';
+import { Op, WhereOptions } from 'sequelize';
 import { Author } from '../authors/entities/author.entity';
 import { Publisher } from '../publishers/entities';
 import { Summary1, Summary2, Summary3 } from '../summaries/entities';
 import { CreateBookDto } from './dto/create-book.dto';
+import { QueryFindByFilterPublicDto } from './dto/queries';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities';
 
@@ -124,6 +125,57 @@ export class BooksService {
       data: rows,
       limit,
       page: createPaginationDto.page,
+      total: count,
+    });
+  }
+
+  async findByFilterPublicPaginate(
+    query: QueryFindByFilterPublicDto,
+  ): Promise<ResponsePaginationDto<Book>> {
+    const { filter, ...rest } = query;
+
+    const { limit, offset } = this.paginationService.generate(rest);
+
+    const whereOptions: WhereOptions = filter
+      ? {
+          [Op.or]: {
+            title: { [Op.iLike]: `%${filter}%` },
+            '$author.alias$': { [Op.iLike]: `%${filter}%` },
+            '$author.surnames$': { [Op.iLike]: `%${filter}%` },
+            '$author.names$': { [Op.iLike]: `%${filter}%` },
+            '$deway.description$': { [Op.iLike]: `%${filter}%` },
+            '$publisher.name$': { [Op.iLike]: `%${filter}%` },
+          },
+        }
+      : null;
+
+    const { count, rows } = await this.bookRepository.findAndCountAll({
+      where: whereOptions,
+      include: [
+        {
+          model: Summary3,
+          include: [
+            {
+              model: Summary2,
+              include: [{ model: Summary1 }],
+            },
+          ],
+        },
+        { model: Author },
+        Publisher,
+      ],
+      limit,
+      offset,
+
+      order: [['createdAt', 'DESC']],
+    });
+
+    return this.paginationService.paginate({
+      apiMethod: EApiMethods.FIND_ALL_PAGINATE,
+      apiRoute: ERoutes.BOOKS,
+      data: rows,
+      limit,
+      page: rest.page,
       total: count,
     });
   }

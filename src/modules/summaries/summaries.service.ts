@@ -27,10 +27,6 @@ export class SummariesService {
   }
 
   async findAllS3(): Promise<Summary3[]> {
-    return await this.summary3Repository.findAll({
-      where: {
-        description: { [Op.not]: '-', [Op.like]: '%NOVELA%' },
-      },
-    });
+    return await this.summary3Repository.findAll();
   }
 }
